@@ -27,7 +27,7 @@ fetch(requestUrl)
 
 // SAWAKO = fuction save to local storage from search history
 
-// ZEINA - function print from local storage
+// ZEINA or SAWAKO = function print from local storage
 
 // JEISON -
 // function 2 advent listener for when click image of the poster
