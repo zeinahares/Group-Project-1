@@ -15,5 +15,16 @@
 // allocate JS functions to each person
 // create a skeleton HTML in class
 
-// Notes:
-// Marvel: 3,000 calls/day
+// OMDb API: http://www.omdbapi.com/?i=tt3896198&apikey=d673ee57
+
+var OMDbAPIkey = 'd673ee57';
+
+var requestUrl = 'http://www.omdbapi.com/?s=harry+potter&page=2&apikey=d673ee57'; // t = specific title , s = search title
+
+fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+  });
