@@ -7,17 +7,77 @@
 
     <!-- linke for materialize.css Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- link for PureCSS framework below // delete if not used -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./Assets/CSS/style.css"/>
   </head>
 
+  <header>
+    <!-- center. add color/style. add font style. possible dropdown menu in navbar component -->
+    <h1>CineFile</h1>
+        <!-- search text stays in the way. change color. reduce size to 25%, with button next to input -->
+    <nav>
+      <div class="nav-wrapper row">
+        <form>
+          <div class="input-field col s10 m3 l2">
+            <input id="search" type="search" required>
+            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+            <i class="material-icons">close</i>
+            <button class="col s2 m1 l1 #ffffff white"for="search">Search</button>
+          </div>
+        </form>
+      </div>
+    <!-- perhaps place inside nav for easier control -->
+    <div class="row">
+      <div class="col s12 m3 l3">
+        <div class="card">
+            <span class="card-title">Search History</span>
+          <div class="card-action">
+            <li><a href="#">This is a link</a></li>
+            <li><a href="#">This is a link</a></li>
+            <li><a href="#">This is a link</a></li>
+            <li><a href="#">This is a link</a></li>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  </header>
+
   <body>
 
-    <textarea placeholder="Search"></textarea><button>Search</button>
+    <!-- perhaps place inside a container, doesn't work with grid, but takes ~70% of page width (<div class="container">)
+      or use <div class="col s6 offset-s6"> to push 6 columns to the right
+        use class section to create top and bottom padding and class divider for all sides? padding (1px)-->
+    <div class="row">
+      <div class="col s3">
+        <div class="card">
+          <div class="card-image">
+            <img src="path/to/poster.jpg">
+            <span class="card-title">Movie Title</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s3">
+        <div class="card">
+          <div class="card-image">
+            <img src="path/to/poster.jpg">
+            <span class="card-title">Movie Title</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
 
 
+
+
+    <!-- <i class="material-icons">thumb_up</i>
+    <i class="material-icons">thumb_down</i>
+
+     could use favorite to add to short list? -->
+    <!-- <i class="material-icons">favorite</i>  -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./Assets/JS/script.js"></script>
