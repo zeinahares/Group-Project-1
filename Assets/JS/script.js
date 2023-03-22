@@ -7,8 +7,8 @@
 // OMDb API: http://www.omdbapi.com/?i=tt3896198&apikey=d673ee57
 
 var OMDbAPIkey = 'd673ee57';
-var OMDbAPIParameter = '&apikey=d673ee57'
-var baseURLOMDb = 'http://www.omdbapi.com/?'
+var OMDbAPIParameter = '&apikey=d673ee57';
+var baseURLOMDb = 'http://www.omdbapi.com/?';
 
 var ExamplerequestUrl = 'http://www.omdbapi.com/?i=tt1201607&apikey=d673ee57'; // t = specific title , s = search title, i = id of specific title
 
@@ -35,7 +35,7 @@ function fetchmoviesList(event) {
   var movieInput = $('#search').val();
 
   if (movieInput.length === 0) {
-    return
+    return;
   }
 
   console.log(movieInput);
@@ -68,10 +68,14 @@ function fetchmoviesList(event) {
         var movieTitle = data.Search[i].Title;
         var movieYear = data.Search[i].Year;
 
+        var movieID = data.Search[i].imdbID;
+
         // create a div with .card
 
         var newCard = $("<div class= 'card'>");
-
+        // div for specific movie now contains its ID as a value
+        // so when the div is clicked, its value can be retrieved without being seen on the HTML
+        newCard.val(movieID);
         // append newCard to row #movieslist
         $('#movieslist').append(newCard);
 
@@ -80,13 +84,18 @@ function fetchmoviesList(event) {
         var movieTitleEl = $("<span class='card-title'>");
 
         movieTitleEl.text(movieTitle + ' (' + movieYear + ')');
+        // movie title element now contains its ID as a value
+        // so when the div is clicked, its value can be retrieved without being seen on the HTML
+        movieTitleEl.val(movieID);
 
         newCard.append(movieTitleEl);
 
         // create img with poster URL & append child to div newCard
-
         var movieposterEl = $('<img>');
         movieposterEl.attr('src', posterURL);
+        // movie poster now contains its ID as a value
+        // so when the div is clicked, its value can be retrieved without being seen on the HTML
+        movieposterEl.val(movieID);
 
         newCard.append(movieposterEl);
       };
