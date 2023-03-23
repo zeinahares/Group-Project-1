@@ -74,7 +74,7 @@ function fetchmoviesList(event) {
 
         var movieID = data.Search[i].imdbID;
 
-        var thumbsup = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">thumb_up</i></button>');
+        var thumbsup = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
 
         // create a div with .card
 
