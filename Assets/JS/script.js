@@ -149,9 +149,6 @@ function addTitleBtn() {
     var deleteBtn = $("<button>");
     deleteBtn.text("X");
     deleteBtn.attr("class", "delete-btn");
-    // var deleteAllBtn = $("<button>");
-    // deleteAllBtn.text("All Clear");
-    // deleteAllBtn.attr("class", "delete-All-btn");        
     titleList.append(titleBtn);
     titleBtn.append(deleteBtn);
     // titleBtn.on(“click”, function () {        // })
@@ -178,7 +175,7 @@ btn.on("click", function (event) {
     return;
   }
   titleArr.push(movieTitle);
-  input.val(""); 
+  input.val("");
   storeTitles();
   addTitleBtn();
 });
@@ -201,7 +198,7 @@ function handleRemoveAllItem(event) {
   titleList.children().remove();
   storeTitles();
   // clear from local storage
-} 
+}
 
 titleList.on("click", ".delete-btn", handleRemoveItem);
 deleteAllBtn.on("click", handleRemoveAllItem);
