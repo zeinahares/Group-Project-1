@@ -197,7 +197,6 @@ function handleRemoveAllItem(event) {
   titleArr.splice(0);
   titleList.children().remove();
   storeTitles();
-  // clear from local storage
 }
 
 titleList.on("click", ".delete-btn", handleRemoveItem);
