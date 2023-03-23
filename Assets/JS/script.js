@@ -180,6 +180,21 @@ btn.on("click", function (event) {
   addTitleBtn();
 });
 
+input.on("keypress", function (event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    console.log("ok");
+    var movieTitle = input.val().trim();
+    if (movieTitle === "") {
+      return;
+    }
+    titleArr.push(movieTitle);
+    input.val("");
+    storeTitles();
+    addTitleBtn();
+  }
+});
+
 function handleRemoveItem(event) {
   var btnClicked = $(event.target);
 
