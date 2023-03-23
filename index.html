@@ -1,26 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cine-file</title>
 
-    <!-- linke for materialize.css Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!-- notes: i left a few comments around to mention a few things i couldn't quite work out or for more designy things for us to decide on.
+I think most of what is left for us to do now is to decide the color design and setup a font-style.
+I think I also still have to make a large, hidden div in the body for a clicked movie. I wasn't sure if it was best to do this in html or js-->
 
-    <!-- link for PureCSS framework below // delete if not used -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="./Assets/CSS/style.css"/>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineFile</title>
 
-  <body>
+  <!-- linke for materialize.css Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- link to get thumbs up and down icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="./Assets/CSS/style.css" />
+</head>
 
-    <textarea placeholder="Search"></textarea><button>Search</button>
+<header>
+  <h1>CineFile</h1>
+  <nav>
+    <!-- why is this div the full width of the page? -->
+    <div class="row">
 
+      <!-- <form>
+        <input id=“input” type=“text”>
+        <button id=“btn”>Submit</button>
+        <button id=“delete-all-btn”>Clear All</button>
+    </form>
+    <div id=“result-container”>
+        <ul id=“title-list”>
+        </ul>
+    </div> -->
+      <form>
+        <!-- couldn't seem to get rid of the 10px space below search bar -->
+        <div class="input-field col s10 m3 l3" id="search-form" style="display: flex;">
+          <input id="search" type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <button id= "submit-btn" class="btn col s4 #1976d2 blue darken-2" type="submit" name="action" for="search">Search</button>
+        </div>
+      </form>
+    </div>
+    <!-- possible dropdown menu in navbar component -->
+    <div class="row" style="margin-bottom: 0;">
+      <div class="col s12 m3 l3 no-padding">
+        <div class="nav-card">
+          <h2 class="card-title">Search History</h2>
+          <button id=“delete-all-btn”>Clear All</button>
+          <div class="card-action" id=“result-container”>
+            <ul id=“title-list”>
+              <!-- <li>This is a link</li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
 
+<body>
+  <div class="row">
+    <div class="col s9 flex-container">
+      <div class = "hide" id="movieslist">
+        <div class="card">
+          <div class="card-image">
+            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
+            <span class="card-title">Movie Title</span>
+            <button class="btn" type="thumb-up" name="action"><i class="material-icons">thumb_up</i></button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image">
+            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
+            <span class="card-title">Movie Title</span>
+            <button class="btn" type="thumb-up" name="action"><i class="material-icons">thumb_up</i></button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="./Assets/JS/script.js"></script>
-  </body>
+  <div class="row">
+    <div class="col s9 flex-container">
+      <div class = "hide" id="moviepage">
+        <div class="card">
+          <div class="card-image">
+            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
+            <span class="card-title">Movie Title</span>
+            <button class="btn" type="thumb-up" name="action"><i class="material-icons">thumb_up</i></button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image">
+            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
+            <span class="card-title">Movie Title</span>
+            <button class="btn" type="thumb-up" name="action"><i class="material-icons">thumb_up</i></button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- do we want a thumbs down?
+  <button class="btn" type="thumb-up" name="action"><i class="material-icons">thumb_down</i></button>
+    could use favorite to add to short list?
+    <i class="material-icons">favorite</i>  -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="./Assets/JS/script.js"></script>
+</body>
+
+<!-- do we want the footer? -->
+<footer>
+  <h5>Trademark of: CineFile</h5>
+</footer>
 </html>
