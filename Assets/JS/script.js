@@ -74,6 +74,8 @@ function fetchmoviesList(event) {
 
         var movieID = data.Search[i].imdbID;
 
+        var thumbsup = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">thumb_up</i></button>');
+
         // create a div with .card
 
         var newCard = $("<div class= 'card'>");
@@ -82,6 +84,15 @@ function fetchmoviesList(event) {
         newCard.val(movieID);
         // append newCard to row #movieslist
         $('#movieslist').append(newCard);
+
+        // create img with poster URL & append child to div newCard
+        var movieposterEl = $('<img>');
+        movieposterEl.attr('src', posterURL);
+        // movie poster now contains its ID as a value
+        // so when the div is clicked, its value can be retrieved without being seen on the HTML
+        movieposterEl.val(movieID);
+
+        newCard.append(movieposterEl);
 
         // create a title with title & year & append child to div newCard
 
@@ -94,14 +105,7 @@ function fetchmoviesList(event) {
 
         newCard.append(movieTitleEl);
 
-        // create img with poster URL & append child to div newCard
-        var movieposterEl = $('<img>');
-        movieposterEl.attr('src', posterURL);
-        // movie poster now contains its ID as a value
-        // so when the div is clicked, its value can be retrieved without being seen on the HTML
-        movieposterEl.val(movieID);
-
-        newCard.append(movieposterEl);
+        newCard.append(thumbsup);
       };
 
       $('#search').val('');
