@@ -109,6 +109,7 @@ function fetchmoviesList(event) {
 
 }
 
+$('#submit-btn').on('click', fetchmoviesList);
 $('#search').on('submit', fetchmoviesList);
 
 // ADD EVENT LISTNER FOR SEARCH BUTTON
