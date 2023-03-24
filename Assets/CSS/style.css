@@ -1,4 +1,109 @@
-/* possible css framkeworks */
-/* https://materializecss.com/ */
-/* https://purecss.io/ */
-/* https://bulma.io/ */
+header {
+  background-color: rgb(58 58 213);
+}
+
+.row {
+  margin: 0px;
+  /* removes a default padding below search input */
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+  font-size: 86px;
+}
+
+nav {
+  background-color: gray;
+  height: 40px;
+}
+
+.no-padding {
+  padding: 0px;
+  /* removes default padding from nav-card */
+}
+
+nav .input-field label i {
+  /* sets search icon to be displayed */
+  color: black;
+  -webkit-transition: color .3s;
+  transition: color .3s;
+}
+
+nav .input-field input:focus+label i {
+  /* sets search icon to be hidden */
+  color: white !important;
+}
+
+#search-form {
+  padding-left: 10px;
+}
+
+  #search-form input { /* makes search bar much prettier */
+    border-radius: 10px;
+    height: 30px;
+  }
+
+  #search-form i {
+    height: 30px;
+    line-height: 30px; /* positions search icon */
+  }
+
+  #search-form button { /* makes search btn much prettier */
+    border-radius: 10px; 
+    height: 30px;
+    margin-left: 5px;
+  }
+
+.nav-card {
+  background-color: rgb(58 58 213);
+  height: calc(100vh - 150px); /* makes nav-car (search history) full height of page */
+  padding: 0px;
+}
+
+li {
+  list-style: none;
+  padding-left: 10px;
+  line-height: 40px; /* sets distance between a tags */
+}
+
+.card-title {
+  text-align: center;
+  margin: 0;  /* removes space between nav-card and search input */
+  font-size: 36px;
+  padding-bottom: 10px;
+  color: black;
+}
+
+.flex-container { /* flexbox for mvoies */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+.card .card-image .card-title { /* card-title had a default position: absolute; */
+  position: unset;
+  color: black;
+}
+
+.card { /* helps with spacing of cards (posters) */
+  width: calc(25% - 20px);
+  margin: 10px;
+}
+
+.card .btn,
+.btn-small i.material-icons { /* styles the thumbs up */
+  background-color: white;
+  color: blue;
+}
+
+footer {
+  background-color: gray;
+}
+
+h5 {
+  font-size: 18px;
+  text-align: center;
+  margin: 0;
+}
