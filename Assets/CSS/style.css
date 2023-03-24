@@ -1,3 +1,6 @@
+/* ZEINA - i added a class for the button elements under the search history so I can target them easier */
+/* the class is .history_item */
+
 header {
   background-color: rgb(58 58 213);
 }

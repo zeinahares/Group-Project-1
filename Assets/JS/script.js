@@ -25,31 +25,8 @@ fetch(ExamplerequestUrl)
 //  CSS - TOM
 //  README - TOM
 
-// ZEINA - event listner print from history button
-
-// ZEINA - function advent listener for searching movies searching movies
-// take text from input button + create request URL
-// display the list of movie titles
-
-function fetchmoviesList(event) {
-
-  // ADD THUMBS UP
-
-  event.preventDefault();
-  var movieInput = $('#search').val();
-
-  if (movieInput.length === 0) {
-    return;
-  }
-
-  console.log(movieInput);
-
-  var movieQuery = movieInput.replace(/ /g, '+');
-
-  console.log(movieQuery);
-
-  var movieListrequestURL = baseURLOMDb + 's=' + movieQuery + OMDbAPIParameter;
-
+// ZEINA - function for searching and displaying list of movies
+function fetchmoviesList(movieListrequestURL) {
   // remove all inner html of the divs on new search
   $('#movieslist').html("");
   $('#moviepage').html("");
@@ -68,13 +45,13 @@ function fetchmoviesList(event) {
       for (i = 0; i < data.Search.length; i++) {
 
         var posterURL = data.Search[i].Poster;
-        console.log(posterURL);
+        // console.log(posterURL);
         var movieTitle = data.Search[i].Title;
         var movieYear = data.Search[i].Year;
 
         var movieID = data.Search[i].imdbID;
 
-        var thumbsup = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+        var favouritesHeart = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
 
         // create a div with .card
 
@@ -105,7 +82,7 @@ function fetchmoviesList(event) {
 
         newCard.append(movieTitleEl);
 
-        newCard.append(thumbsup);
+        newCard.append(favouritesHeart);
       };
 
       $('#search').val('');
@@ -113,26 +90,8 @@ function fetchmoviesList(event) {
 
 }
 
-$('#submit-btn').on('click', fetchmoviesList);
-$('#search').on('submit', fetchmoviesList);
-
-// ADD EVENT LISTNER FOR SEARCH BUTTON
-
-$('#search').on('keypress', function (event) {
-
-  // if user presses enter on the page, fetch the movies list
-
-  if (event.keyCode === 13) {
-    console.log(event.keyCode);
-    fetchmoviesList(event);
-  }
-});
-
-
-
-// display the list of movie titles
-
-function fetchmoviesList(event) {
+// ZEINA - function to create moviesList reuquest URL from search input
+function moviesSearchRequestURL(event) {
 
   event.preventDefault();
   var movieInput = $('#search').val();
@@ -140,87 +99,45 @@ function fetchmoviesList(event) {
   if (movieInput.length === 0) {
     return;
   }
-
   console.log(movieInput);
 
   var movieQuery = movieInput.replace(/ /g, '+');
-
   console.log(movieQuery);
 
   var movieListrequestURL = baseURLOMDb + 's=' + movieQuery + OMDbAPIParameter;
-
-  // remove all inner html of the divs on new search
-  $('#movieslist').html("");
-  $('#moviepage').html("");
-
-  fetch(movieListrequestURL)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-
-      // remove hide attribute from movieslist & hide moviepage
-      $('#movieslist').removeClass();
-      $('#moviepage').addClass('hide');
-
-      for (i = 0; i < data.Search.length; i++) {
-
-        var posterURL = data.Search[i].Poster;
-        console.log(posterURL);
-        var movieTitle = data.Search[i].Title;
-        var movieYear = data.Search[i].Year;
-
-        var movieID = data.Search[i].imdbID;
-
-        // create a div with .card
-
-        var newCard = $("<div class= 'card'>");
-        // div for specific movie now contains its ID as a value
-        // so when the div is clicked, its value can be retrieved without being seen on the HTML
-        newCard.val(movieID);
-        // append newCard to row #movieslist
-        $('#movieslist').append(newCard);
-
-        // create a title with title & year & append child to div newCard
-
-        var movieTitleEl = $("<span class='card-title'>");
-
-        movieTitleEl.text(movieTitle + ' (' + movieYear + ')');
-        // movie title element now contains its ID as a value
-        // so when the div is clicked, its value can be retrieved without being seen on the HTML
-        movieTitleEl.val(movieID);
-
-        newCard.append(movieTitleEl);
-
-        // create img with poster URL & append child to div newCard
-        var movieposterEl = $('<img>');
-        movieposterEl.attr('src', posterURL);
-        // movie poster now contains its ID as a value
-        // so when the div is clicked, its value can be retrieved without being seen on the HTML
-        movieposterEl.val(movieID);
-
-        newCard.append(movieposterEl);
-      };
-
-      $('#search').val('');
-    });
-
+  fetchmoviesList(movieListrequestURL);
 }
 
-$('#search').on('submit', fetchmoviesList);
+$('#submit-btn').on('click', moviesSearchRequestURL);
+$('#search').on('submit', moviesSearchRequestURL);
 
 $('#search').on('keypress', function (event) {
 
   // if user presses enter on the page, fetch the movies list
-
   if (event.keyCode === 13) {
     console.log(event.keyCode);
-    fetchmoviesList(event);
+    moviesSearchRequestURL(event);
   }
 });
 
 
+// ZEINA - function to create movieListrequestURL from pressing on search history
+function historyRequestURL() {
+
+  var movieInput = $(this).text();
+  console.log(movieInput);
+
+  // slice off X at the end of input + change any space to +
+  var movieQuery = movieInput.replace(/ /g, '+').slice(0,-1);
+  console.log(movieQuery);
+
+  var movieListrequestURL = baseURLOMDb + 's=' + movieQuery + OMDbAPIParameter;
+  fetchmoviesList(movieListrequestURL);
+
+}
+
+// ZEINA - event listner display moviesList from history print
+$(document).on('click', '.history_item', historyRequestURL);
 
 
 // SAWAKO = fuction save to local storage from search history
@@ -239,7 +156,7 @@ function addTitleBtn() {
 
   for (var i = 0; i < titleArr.length; i++) {
     var nameOfMovie = titleArr[i];
-    var titleBtn = $("<li>");
+    var titleBtn = $("<button class='history_item'>");
     titleBtn.text(nameOfMovie);
     titleBtn.attr("data-index", i);
 
@@ -309,7 +226,6 @@ function handleRemoveAllItem(event) {
   titleArr.splice(0);
   titleList.children().remove();
   storeTitles();
-  // clear from local storage
 }
 
 titleList.on("click", ".delete-btn", handleRemoveItem);
