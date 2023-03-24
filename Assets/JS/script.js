@@ -39,8 +39,9 @@ function fetchmoviesList(movieListrequestURL) {
       console.log(data);
 
       // remove hide attribute from movieslist & hide moviepage
-      $('#movieslist').removeClass();
+      $('#movieslist').removeClass('hide');
       $('#moviepage').addClass('hide');
+      $('#choiceTitle').addClass('hide');
 
       for (i = 0; i < data.Search.length; i++) {
 
@@ -62,6 +63,10 @@ function fetchmoviesList(movieListrequestURL) {
         // append newCard to row #movieslist
         $('#movieslist').append(newCard);
 
+        var cardImage = $("<div class = 'card-image'>");
+
+        newCard.append(cardImage);
+
         // create img with poster URL & append child to div newCard
         var movieposterEl = $('<img>');
         movieposterEl.attr('src', posterURL);
@@ -69,7 +74,7 @@ function fetchmoviesList(movieListrequestURL) {
         // so when the div is clicked, its value can be retrieved without being seen on the HTML
         movieposterEl.val(movieID);
 
-        newCard.append(movieposterEl);
+        cardImage.append(movieposterEl);
 
         // create a title with title & year & append child to div newCard
 
@@ -80,9 +85,9 @@ function fetchmoviesList(movieListrequestURL) {
         // so when the div is clicked, its value can be retrieved without being seen on the HTML
         movieTitleEl.val(movieID);
 
-        newCard.append(movieTitleEl);
+        cardImage.append(movieTitleEl);
 
-        newCard.append(favouritesHeart);
+        cardImage.append(favouritesHeart);
       };
 
       $('#search').val('');
