@@ -75,6 +75,7 @@ function fetchmoviesList(movieListrequestURL) {
         movieposterEl.val(movieID);
 
         cardImage.append(movieposterEl);
+        cardImage.val(movieID);
 
         // create a title with title & year & append child to div newCard
 
@@ -237,15 +238,55 @@ titleList.on("click", ".delete-btn", handleRemoveItem);
 deleteAllBtn.on("click", handleRemoveAllItem);
 init();
 
-
-
-
-
 // JEISON -
 // function 2 advent listener for when click image of the poster
 // get id from image clicked
 // - -
 // hide the previous div / and unhide new div
+
+
+$(document).on('click', '.card-image', movieClickURL);
+
+
+function movieClickURL () {
+var movieId = $(this).val(); // gives me id 
+  console.log($(this).val()) 
+
+  var movieRequestURL = baseURLOMDb + 'i=' + movieId + OMDbAPIParameter;
+  printMovie(movieRequestURL)
+}
+
+function printMovie (movieRequestURL){
+  fetch (movieRequestURL)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+
+    $('#moviepage').html("");
+
+    $('#moviepage').removeClass('hide');
+    $('#movieslist').addClass('hide');
+
+    var titleMovie = data.Title;
+    var yearRelease = data.Released;
+    var Ratings = data.Ratings[0].Value;
+    var durationMovie = data.Runtime;
+    var language = data.Language;
+    var descriptionMovie = data.Plot;
+    var movieDirector = data.Director;
+    var actors = data.Actors;
+    var genre = data.Genre;
+    var country = data.Country;
+    var movieAwards = data.Awards;
+    
+  });
+
+}
+
+
+
 // and append new items
 
 // OPTIONAL : youtube trailer
