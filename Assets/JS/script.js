@@ -208,6 +208,21 @@ function historyRequestURL() {
 // ZEINA - event listner display moviesList from history print
 $(document).on('click', '.history_item', historyRequestURL);
 
+var movieInput = $(this).text();
+console.log(movieInput);
+
+// slice off X at the end of input + change any space to +
+var movieQuery = movieInput.replace(/ /g, '+').slice(0, -1);
+console.log(movieQuery);
+
+var movieListrequestURL = baseURLOMDb + 's=' + movieQuery + OMDbAPIParameter;
+fetchmoviesList(movieListrequestURL);
+
+}
+
+// ZEINA - event listner display moviesList from history print
+$(document).on('click', '.history_item', historyRequestURL);
+
 
 var titleFavArr = [];
 var storageFavKey = "Fav Movie Title";
@@ -316,6 +331,7 @@ input.on("keypress", function (event) {
     if (movieTitle === "") {
       return;
     }
+    titleArr.push(movieTitle);
     if (titleArr.includes(movieTitle) !== true) {
       titleArr.push(movieTitle);
     }
