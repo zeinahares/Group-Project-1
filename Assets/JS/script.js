@@ -53,7 +53,7 @@ function fetchmoviesList(movieListrequestURL) {
         var movieID = data.Search[i].imdbID;
 
         var favouritesHeart = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
-
+        favouritesHeart.attr("title", movieTitle);
         // create a div with .card
 
         var newCard = $("<div class= 'card'>");
@@ -89,6 +89,69 @@ function fetchmoviesList(movieListrequestURL) {
         cardImage.append(movieTitleEl);
 
         cardImage.append(favouritesHeart);
+
+        function initThumbBtn() {
+          initFavScreen();
+          if (titleFavArr.includes(movieTitle) === true) {
+            favouritesHeart.children().addClass("clicked-fav");
+            console.log("init thumb")
+
+          }
+        }
+        initThumbBtn();
+
+        function handleShortList(event) {
+          event.stopPropagation();
+          var thumbClicked = $(event.target);
+
+          if (thumbClicked.is("button") === true) {
+
+
+            var thumbClickedTitle = thumbClicked.attr("title");
+            if (titleFavArr.includes(thumbClickedTitle) !== true) {
+              titleFavArr.push(thumbClickedTitle);
+            }
+
+            storeFavTitles();
+            addFavBtn();
+
+            thumbClicked.children().toggleClass("clicked-fav");
+
+            if (thumbClicked.children().is(".clicked-fav") !== true) {
+              var index = thumbClicked.attr("data-index");
+              titleFavArr.splice(index, 1);
+              addFavBtn();
+              storeFavTitles();
+
+            }
+
+
+            if (titleFavArr.includes(thumbClickedTitle) === true) {
+              thumbClicked.children().addClass("clicked-fav");
+            }
+
+
+
+            $('#short-list').on("click", ".delete-fab-btn", function (event) {
+              var deleteFabBtnClicked = $(event.target);
+              if (deleteFabBtnClicked.is("button") === true) {
+                if (thumbClicked.children().is(".clicked-fav") === true) {
+                  thumbClicked.children().removeClass('clicked-fav');
+                }
+
+              }
+            });
+
+            $('#delete-all-fab-btn').on("click", function () {
+              if (thumbClicked.children().is(".clicked-fav") === true) {
+                thumbClicked.children().removeClass('clicked-fav');
+              }
+            });
+
+          }
+
+        }
+        favouritesHeart.on('click', handleShortList);
       };
 
       $('#search').val('');
@@ -134,7 +197,7 @@ function historyRequestURL() {
   console.log(movieInput);
 
   // slice off X at the end of input + change any space to +
-  var movieQuery = movieInput.replace(/ /g, '+').slice(0,-1);
+  var movieQuery = movieInput.replace(/ /g, '+').slice(0, -1);
   console.log(movieQuery);
 
   var movieListrequestURL = baseURLOMDb + 's=' + movieQuery + OMDbAPIParameter;
@@ -146,11 +209,45 @@ function historyRequestURL() {
 $(document).on('click', '.history_item', historyRequestURL);
 
 
+var titleFavArr = [];
+var storageFavKey = "Fav Movie Title";
+
+function addFavBtn() {
+  $("#short-list").html("");
+  var length = titleFavArr ? titleFavArr.length : 0;
+
+  for (var i = 0; i < length; i++) {
+    var favBtn = $("<li>");
+    var deleteFavBtn = $("<button>");
+
+    favBtn.attr("data-index", i);
+    favBtn.text(titleFavArr[i]);
+
+    deleteFavBtn.text("X");
+    deleteFavBtn.attr("class", "delete-fab-btn");
+
+    $("#short-list").append(favBtn);
+    favBtn.append(deleteFavBtn);
+  }
+}
+
+function storeFavTitles() {
+  localStorage.setItem(storageFavKey, JSON.stringify(titleFavArr));
+}
+
+function initFavScreen() {
+  var storedFavTitle = JSON.parse(localStorage.getItem(storageFavKey));
+
+  if (storedFavTitle !== null) {
+    titleFavArr = storedFavTitle;
+  }
+}
+
 // SAWAKO = fuction save to local storage from search history
 // SAWAKO = function print from local storage
 
 var input = $("#search");
-var btn = $("#submit-btn");
+var searchBtn = $("#submit-btn");
 var resultContainer = $("#result-container");
 var titleList = $("#title-list");
 var deleteAllBtn = $("#delete-all-btn");
@@ -171,11 +268,11 @@ function addTitleBtn() {
     deleteBtn.attr("class", "delete-btn");
     titleList.append(titleBtn);
     titleBtn.append(deleteBtn);
-    // titleBtn.on(“click”, function () {        // })
+
   }
 }
 
-function init() {
+function initScreen() {
   var storedTitle = JSON.parse(localStorage.getItem(storageKey));
   if (storedTitle !== null) {
     titleArr = storedTitle;
@@ -183,18 +280,29 @@ function init() {
   addTitleBtn();
 }
 
+$(document).ready(function () {
+
+  initScreen();
+  initFavScreen();
+  addFavBtn();
+  input.focus();
+})
+
 function storeTitles() {
   localStorage.setItem(storageKey, JSON.stringify(titleArr));
 }
 
-btn.on("click", function (event) {
+searchBtn.on("click", function (event) {
   event.preventDefault();
   console.log("ok");
   var movieTitle = input.val().trim();
   if (movieTitle === "") {
-    return;
+    return alert("Input some words belog to a movie title which you want to search.");
   }
-  titleArr.push(movieTitle);
+  if (titleArr.includes(movieTitle) !== true) {
+    titleArr.push(movieTitle);
+  }
+
   input.val("");
   storeTitles();
   addTitleBtn();
@@ -209,6 +317,10 @@ input.on("keypress", function (event) {
       return;
     }
     titleArr.push(movieTitle);
+    if (titleArr.includes(movieTitle) !== true) {
+      titleArr.push(movieTitle);
+    }
+
     input.val("");
     storeTitles();
     addTitleBtn();
@@ -236,14 +348,36 @@ function handleRemoveAllItem(event) {
 
 titleList.on("click", ".delete-btn", handleRemoveItem);
 deleteAllBtn.on("click", handleRemoveAllItem);
-init();
+
+function handleRemoveFavItem(event) {
+  var deleteFabBtnClicked = $(event.target);
+
+  if (deleteFabBtnClicked.is("button") === true) {
+    var index = deleteFabBtnClicked.parent().attr("data-index");
+    titleFavArr.splice(index, 1);
+    addFavBtn();
+    storeFavTitles();
+
+  }
+}
+
+function handleRemoveAllFavItem(event) {
+  event.preventDefault();
+  titleFavArr.splice(0);
+  $('#short-list').children().remove();
+  storeFavTitles();
+}
+
+$('#short-list').on("click", ".delete-fab-btn", handleRemoveFavItem);
+$('#delete-all-fab-btn').on("click", handleRemoveAllFavItem);
+
+
 
 // JEISON -
 // function 2 advent listener for when click image of the poster
 // get id from image clicked
 // - -
 // hide the previous div / and unhide new div
-
 
 $(document).on('click', '.card-image', movieClickURL);
 
@@ -282,50 +416,46 @@ function printMovie (movieRequestURL){
     var movieAwards = data.Awards;
     var posterMovie = data.Poster;
     
-
-
-    var moviePage= $('#moviepage') 
-    var pageCard= $('<div class="titlecard">')
+    var moviePage= $('#moviepage');
+    var imgEl= $('<img>');
+    var pageCard= $('<div class="titlecard">');
     var titleEl= $('<h2>');
-    var durationEl= $('<p>')
+    var title2El= $('<h3>');
+    var durationEl= $('<p>');
+    var languageEl= $('<p>');
     var pEl= $('<p>');
-    var p2El= $('<p>');
-    var p3El= $('<p>');
-    var imgEl= $('<img>')
+    var dirEl= $('<p>');
+    var actorsEl= $('<p>');
+    var genreEl= $('<p>');
+    var countryEl= $('<p>');
+    var AwardsEl= $('<p>');
+
     var favouritesHeart = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
 
 
-    moviePage.append(pageCard)
+    moviePage.append(pageCard);
 
-    imgEl.attr('src', posterMovie)
+    imgEl.attr('src', posterMovie);
 
     titleEl.text('Plot: ' + titleMovie + '(' + yearRelease + ')');
-
-    durationEl.text('Duration: ' + durationMovie)
-    pEl.text('Description: ' + descriptionMovie)
-    p2El.text('Director: ' + movieDirector + ' | ' + "Cast: " + actors + ' | ' + 'Movie Awards: ' + movieAwards )
-    p3El.text('Country: ' + country + ' | ' + 'Genre: ' + genre + '.' + 'Duration: ' + durationMovie 
-    + '|' + 'Language: ' + language + ' | ' + 'Ratings: ' + Ratings )
-
-    pageCard.append( imgEl, titleEl, favouritesHeart, durationEl, pEl, p2El, p3El)   
-
-    // titleEl.text('plot:'+titleMovie);
-    // pageCard.append(titleEl);
-    // titleEl.text('Plot:' + titleMovie + '(' + yearReleased + ')');
+    title2El.text('Ratings: ' + Ratings);
+    durationEl.text('Duration: ' + durationMovie);
+    languageEl.text('Language: ' + language);
+    pEl.text('Description: ' + descriptionMovie);
+    dirEl.text('Director: ' + movieDirector + '.');
+    actorsEl.text('Actors: ' + actors + '.');
+    genreEl.text('Genre: ' + genre + '.');
+    countryEl.text('Country: ' + country);
+    AwardsEl.text('Awards: ' + movieAwards + '.')
 
 
-    // $(pageCard).append(titleEl, pEl)
-    // $(titleEl).append(titleMovie)
-    // $(subTitelEl).append(yearRelease,brEl,Ratings, brEl, durationMovie, brEl,
-    //   language)
-    // $(pEl).append(descriptionMovie,brEl,movieDirector,actors,brEl,
-    //   genre,country,movieAwards)
-    
-
+    pageCard.append( imgEl, titleEl, favouritesHeart, title2El, durationEl, languageEl, pEl, dirEl,
+      actorsEl, genreEl, countryEl, AwardsEl)   
   });
 
 
-}
+
+  }
 
 
 
