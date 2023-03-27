@@ -379,18 +379,13 @@ $('#delete-all-fab-btn').on("click", handleRemoveAllFavItem);
 // - -
 // hide the previous div / and unhide new div
 
-
 $(document).on('click', '.card-image', movieClickURL);
-
-
 function movieClickURL() {
-  var movieId = $(this).val(); // gives me id 
+  var movieId = $(this).val(); // gives me id
   console.log($(this).val())
-
   var movieRequestURL = baseURLOMDb + 'i=' + movieId + OMDbAPIParameter;
   printMovie(movieRequestURL)
 }
-
 function printMovie(movieRequestURL) {
   fetch(movieRequestURL)
     .then(function (response) {
@@ -400,7 +395,6 @@ function printMovie(movieRequestURL) {
       console.log(data);
 
       $('#moviepage').html("");
-
       $('#moviepage').removeClass('hide');
       $('#movieslist').addClass('hide');
 
@@ -418,49 +412,44 @@ function printMovie(movieRequestURL) {
       var posterMovie = data.Poster;
 
 
-
-      var moviePage = $('#moviepage')
-      var pageCard = $('<div class="titlecard">')
+      var moviePage = $('#moviepage');
+      var imgEl = $('<img>');
+      var pageCard = $('<div class="titlecard">');
       var titleEl = $('<h2>');
+      var title2El = $('<h3>');
+      var durationEl = $('<p>');
+      var languageEl = $('<p>');
       var pEl = $('<p>');
-      var p2El = $('<p>');
-      var p3El = $('<p>');
-      var imgEl = $('<img>')
+      var dirEl = $('<p>');
+      var actorsEl = $('<p>');
+      var genreEl = $('<p>');
+      var countryEl = $('<p>');
+      var AwardsEl = $('<p>');
       var favouritesHeart = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+      moviePage.append(pageCard);
 
-
-      moviePage.append(pageCard)
-
-      imgEl.attr('src', posterMovie)
+      imgEl.attr('src', posterMovie);
 
       titleEl.text('Plot: ' + titleMovie + '(' + yearRelease + ')');
-      pEl.text('Description: ' + descriptionMovie)
-      p2El.text('Director: ' + movieDirector + ' | ' + "Cast: " + actors + ' | ' + 'Movie Awards: ' + movieAwards)
-      p3El.text('Country: ' + country + ' | ' + 'Genre: ' + genre + '.' + 'Duration: ' + durationMovie
-        + '|' + 'Language: ' + language + ' | ' + 'Ratings: ' + Ratings)
+      title2El.text('Ratings: ' + Ratings);
 
-      pageCard.append(imgEl, favouritesHeart, titleEl, pEl, p2El, p3El)
+      durationEl.text('Duration: ' + durationMovie);
+      languageEl.text('Language: ' + language);
 
-      // titleEl.text('plot:'+titleMovie);
-      // pageCard.append(titleEl);
-      // titleEl.text('Plot:' + titleMovie + '(' + yearReleased + ')');
+      pEl.text('Description: ' + descriptionMovie);
+      dirEl.text('Director: ' + movieDirector + '.');
 
+      actorsEl.text('Actors: ' + actors + '.');
+      genreEl.text('Genre: ' + genre + '.');
 
-      // $(pageCard).append(titleEl, pEl)
-      // $(titleEl).append(titleMovie)
-      // $(subTitelEl).append(yearRelease,brEl,Ratings, brEl, durationMovie, brEl,
-      //   language)
-      // $(pEl).append(descriptionMovie,brEl,movieDirector,actors,brEl,
-      //   genre,country,movieAwards)
+      countryEl.text('Country: ' + country);
+      AwardsEl.text('Awards: ' + movieAwards + '.');
 
+      pageCard.append(imgEl, titleEl, favouritesHeart, title2El, durationEl, languageEl, pEl, dirEl,
+        actorsEl, genreEl, countryEl, AwardsEl);
 
     });
-
-
-
 }
-
-
 // and append new items
 
 // OPTIONAL : youtube trailer
