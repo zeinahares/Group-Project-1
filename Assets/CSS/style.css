@@ -4,8 +4,8 @@
 /* ZEINA - i added a class for the button elements under the search history so I can target them easier */
 /* the class is .history_item */
 
-*,
-.btn {
+*, 
+.btn{
   font-family: 'Gruppo', cursive;
 }
 
@@ -41,7 +41,7 @@ nav .input-field label i {
   transition: color .3s;
 }
 
-#search {
+#search{
   background-color: white;
 }
 
@@ -81,11 +81,11 @@ nav .input-field label i {
   padding: 0px;
 }
 
-.history {
+.history{
   background-color: #48A9A6;
 }
 
-.history_item {
+.history_item{
   background-color: #D4B483;
   color: white;
   border-radius: 10px;
@@ -93,7 +93,7 @@ nav .input-field label i {
   margin-left: 15px;
 }
 
-.short-list {
+.short-list{
   background-color: #C1666B;
 }
 
@@ -118,7 +118,7 @@ li {
   color: black;
 }
 
-body {
+body{
   background-color: #E4DFDA;
 }
 
@@ -161,6 +161,6 @@ h5 {
   margin: 0;
 }
 
-.clicked-fav {
-  color: pink;
+#choiceTitle {
+  width: 100%;
 }
