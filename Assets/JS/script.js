@@ -280,22 +280,44 @@ function printMovie (movieRequestURL){
     var genre = data.Genre;
     var country = data.Country;
     var movieAwards = data.Awards;
+    var posterMovie = data.Poster;
+    
 
 
-    const moviePage= document.getElementById('moviepage') 
-    var pageCard= $('<div class=card>')
+    var moviePage= $('#moviepage') 
+    var pageCard= $('<div class="titlecard">')
     var titleEl= $('<h2>');
-    var subTitelEl=$('<h3>');
     var pEl= $('<p>');
-    var brEl= $('<br>');
+    var p2El= $('<p>');
+    var p3El= $('<p>');
+    var imgEl= $('<img>')
+    var favouritesHeart = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
 
-    $(moviePage).append(pageCard)
-    $(pageCard).append(titleEl, pEl)
-    $(titleEl).append(titleMovie)
-    $(subTitelEl).append(yearRelease,brEl,Ratings, brEl, durationMovie, brEl,
-      language)
-    $(pEl).append(descriptionMovie,brEl,movieDirector,actors,brEl,
-      genre,country,movieAwards)
+
+    moviePage.append(pageCard)
+
+    imgEl.attr('src', posterMovie)
+
+    titleEl.text('Plot: ' + titleMovie + '(' + yearRelease + ')');
+    pEl.text('Description: ' + descriptionMovie)
+    p2El.text('Director: ' + movieDirector + ' | ' + "Cast: " + actors + ' | ' + 'Movie Awards: ' + movieAwards )
+    p3El.text('Country: ' + country + ' | ' + 'Genre: ' + genre + '.' + 'Duration: ' + durationMovie 
+    + '|' + 'Language: ' + language + ' | ' + 'Ratings: ' + Ratings )
+
+    pageCard.append( imgEl, favouritesHeart, titleEl, pEl, p2El, p3El)   
+
+    // titleEl.text('plot:'+titleMovie);
+    // pageCard.append(titleEl);
+    // titleEl.text('Plot:' + titleMovie + '(' + yearReleased + ')');
+
+
+    // $(pageCard).append(titleEl, pEl)
+    // $(titleEl).append(titleMovie)
+    // $(subTitelEl).append(yearRelease,brEl,Ratings, brEl, durationMovie, brEl,
+    //   language)
+    // $(pEl).append(descriptionMovie,brEl,movieDirector,actors,brEl,
+    //   genre,country,movieAwards)
+    
 
   });
 
