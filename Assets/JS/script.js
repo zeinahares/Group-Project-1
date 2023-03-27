@@ -53,11 +53,6 @@ function fetchmoviesList(movieListrequestURL) {
         var movieID = data.Search[i].imdbID;
 
         var favouritesHeart = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
-<<<<<<< HEAD
-        favouritesHeart.attr("title", movieTitle);
-=======
-
->>>>>>> main
         // create a div with .card
 
         var newCard = $("<div class= 'card'>");
@@ -93,72 +88,6 @@ function fetchmoviesList(movieListrequestURL) {
         cardImage.append(movieTitleEl);
 
         cardImage.append(favouritesHeart);
-<<<<<<< HEAD
-
-        function initThumbBtn() {
-          initFavScreen();
-          if (titleFavArr.includes(movieTitle) === true) {
-            favouritesHeart.children().addClass("clicked-fav");
-            console.log("init thumb")
-
-          }
-        }
-        initThumbBtn();
-
-        function handleShortList(event) {
-          event.stopPropagation();
-          var thumbClicked = $(event.target);
-
-          if (thumbClicked.is("button") === true) {
-
-
-            var thumbClickedTitle = thumbClicked.attr("title");
-            if (titleFavArr.includes(thumbClickedTitle) !== true) {
-              titleFavArr.push(thumbClickedTitle);
-            }
-
-            storeFavTitles();
-            addFavBtn();
-
-            thumbClicked.children().toggleClass("clicked-fav");
-
-            if (thumbClicked.children().is(".clicked-fav") !== true) {
-              var index = thumbClicked.attr("data-index");
-              titleFavArr.splice(index, 1);
-              addFavBtn();
-              storeFavTitles();
-
-            }
-
-
-            if (titleFavArr.includes(thumbClickedTitle) === true) {
-              thumbClicked.children().addClass("clicked-fav");
-            }
-
-
-
-            $('#short-list').on("click", ".delete-fab-btn", function (event) {
-              var deleteFabBtnClicked = $(event.target);
-              if (deleteFabBtnClicked.is("button") === true) {
-                if (thumbClicked.children().is(".clicked-fav") === true) {
-                  thumbClicked.children().removeClass('clicked-fav');
-                }
-
-              }
-            });
-
-            $('#delete-all-fab-btn').on("click", function () {
-              if (thumbClicked.children().is(".clicked-fav") === true) {
-                thumbClicked.children().removeClass('clicked-fav');
-              }
-            });
-
-          }
-
-        }
-        favouritesHeart.on('click', handleShortList);
-=======
->>>>>>> main
       };
 
       $('#search').val('');
@@ -179,19 +108,11 @@ function moviesSearchRequestURL(event) {
 
   var movieQuery = movieInput.replace(/ /g, '+');
   console.log(movieQuery);
-<<<<<<< HEAD
 
   var movieListrequestURL = baseURLOMDb + 's=' + movieQuery + OMDbAPIParameter;
   fetchmoviesList(movieListrequestURL);
 }
 
-=======
-
-  var movieListrequestURL = baseURLOMDb + 's=' + movieQuery + OMDbAPIParameter;
-  fetchmoviesList(movieListrequestURL);
-}
-
->>>>>>> main
 $('#submit-btn').on('click', moviesSearchRequestURL);
 $('#search').on('submit', moviesSearchRequestURL);
 
@@ -207,8 +128,6 @@ $('#search').on('keypress', function (event) {
 
 // ZEINA - function to create movieListrequestURL from pressing on search history
 function historyRequestURL() {
-<<<<<<< HEAD
-=======
 
   var movieInput = $(this).text();
   console.log(movieInput);
@@ -224,7 +143,6 @@ function historyRequestURL() {
 
 // ZEINA - event listner display moviesList from history print
 $(document).on('click', '.history_item', historyRequestURL);
->>>>>>> main
 
   var movieInput = $(this).text();
   console.log(movieInput);
@@ -349,14 +267,7 @@ input.on("keypress", function (event) {
     if (movieTitle === "") {
       return;
     }
-<<<<<<< HEAD
-    if (titleArr.includes(movieTitle) !== true) {
-      titleArr.push(movieTitle);
-    }
-
-=======
     titleArr.push(movieTitle);
->>>>>>> main
     input.val("");
     storeTitles();
     addTitleBtn();
@@ -385,33 +296,6 @@ function handleRemoveAllItem(event) {
 titleList.on("click", ".delete-btn", handleRemoveItem);
 deleteAllBtn.on("click", handleRemoveAllItem);
 
-<<<<<<< HEAD
-function handleRemoveFavItem(event) {
-  var deleteFabBtnClicked = $(event.target);
-
-  if (deleteFabBtnClicked.is("button") === true) {
-    var index = deleteFabBtnClicked.parent().attr("data-index");
-    titleFavArr.splice(index, 1);
-    addFavBtn();
-    storeFavTitles();
-
-  }
-}
-
-function handleRemoveAllFavItem(event) {
-  event.preventDefault();
-  titleFavArr.splice(0);
-  $('#short-list').children().remove();
-  storeFavTitles();
-}
-
-$('#short-list').on("click", ".delete-fab-btn", handleRemoveFavItem);
-$('#delete-all-fab-btn').on("click", handleRemoveAllFavItem);
-
-
-
-=======
->>>>>>> main
 // JEISON -
 // function 2 advent listener for when click image of the poster
 // get id from image clicked
@@ -422,64 +306,14 @@ $('#delete-all-fab-btn').on("click", handleRemoveAllFavItem);
 $(document).on('click', '.card-image', movieClickURL);
 
 
-<<<<<<< HEAD
-function movieClickURL() {
-  var movieId = $(this).val(); // gives me id 
-  console.log($(this).val())
-=======
 function movieClickURL () {
 var movieId = $(this).val(); // gives me id 
   console.log($(this).val()) 
->>>>>>> main
 
   var movieRequestURL = baseURLOMDb + 'i=' + movieId + OMDbAPIParameter;
   printMovie(movieRequestURL)
 }
 
-<<<<<<< HEAD
-function printMovie(movieRequestURL) {
-  fetch(movieRequestURL)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-
-      $('#moviepage').html("");
-
-      $('#moviepage').removeClass('hide');
-      $('#movieslist').addClass('hide');
-
-      var titleMovie = data.Title;
-      var yearRelease = data.Released;
-      var Ratings = data.Ratings[0].Value;
-      var durationMovie = data.Runtime;
-      var language = data.Language;
-      var descriptionMovie = data.Plot;
-      var movieDirector = data.Director;
-      var actors = data.Actors;
-      var genre = data.Genre;
-      var country = data.Country;
-      var movieAwards = data.Awards;
-
-
-      const moviePage = document.getElementById('moviepage')
-      var pageCard = $('<div class=card>')
-      var titleEl = $('<h2>');
-      var subTitelEl = $('<h3>');
-      var pEl = $('<p>');
-      var brEl = $('<br>');
-
-      $(moviePage).append(pageCard)
-      $(pageCard).append(titleEl, pEl)
-      $(titleEl).append(titleMovie)
-      $(subTitelEl).append(yearRelease, brEl, Ratings, brEl, durationMovie, brEl,
-        language)
-      $(pEl).append(descriptionMovie, brEl, movieDirector, actors, brEl,
-        genre, country, movieAwards)
-
-    });
-=======
 function printMovie (movieRequestURL){
   fetch (movieRequestURL)
   .then(function (response) {
@@ -544,7 +378,6 @@ function printMovie (movieRequestURL){
     
 
   });
->>>>>>> main
 
 
 }
