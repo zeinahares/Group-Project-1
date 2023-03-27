@@ -433,9 +433,75 @@ function printMovie(movieRequestURL) {
 
     });
 
+  function printMovie(movieRequestURL) {
+    fetch(movieRequestURL)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
 
+        $('#moviepage').html("");
+
+        $('#moviepage').removeClass('hide');
+        $('#movieslist').addClass('hide');
+
+        var titleMovie = data.Title;
+        var yearRelease = data.Released;
+        var Ratings = data.Ratings[0].Value;
+        var durationMovie = data.Runtime;
+        var language = data.Language;
+        var descriptionMovie = data.Plot;
+        var movieDirector = data.Director;
+        var actors = data.Actors;
+        var genre = data.Genre;
+        var country = data.Country;
+        var movieAwards = data.Awards;
+        var posterMovie = data.Poster;
+
+
+
+        var moviePage = $('#moviepage')
+        var pageCard = $('<div class="titlecard">')
+        var titleEl = $('<h2>');
+        var pEl = $('<p>');
+        var p2El = $('<p>');
+        var p3El = $('<p>');
+        var imgEl = $('<img>')
+        var favouritesHeart = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+
+
+        moviePage.append(pageCard)
+
+        imgEl.attr('src', posterMovie)
+
+        titleEl.text('Plot: ' + titleMovie + '(' + yearRelease + ')');
+        pEl.text('Description: ' + descriptionMovie)
+        p2El.text('Director: ' + movieDirector + ' | ' + "Cast: " + actors + ' | ' + 'Movie Awards: ' + movieAwards)
+        p3El.text('Country: ' + country + ' | ' + 'Genre: ' + genre + '.' + 'Duration: ' + durationMovie
+          + '|' + 'Language: ' + language + ' | ' + 'Ratings: ' + Ratings)
+
+        pageCard.append(imgEl, favouritesHeart, titleEl, pEl, p2El, p3El)
+
+        // titleEl.text('plot:'+titleMovie);
+        // pageCard.append(titleEl);
+        // titleEl.text('Plot:' + titleMovie + '(' + yearReleased + ')');
+
+
+        // $(pageCard).append(titleEl, pEl)
+        // $(titleEl).append(titleMovie)
+        // $(subTitelEl).append(yearRelease,brEl,Ratings, brEl, durationMovie, brEl,
+        //   language)
+        // $(pEl).append(descriptionMovie,brEl,movieDirector,actors,brEl,
+        //   genre,country,movieAwards)
+
+
+      });
+
+
+
+  }
 }
-
 
 
 // and append new items
