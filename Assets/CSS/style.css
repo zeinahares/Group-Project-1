@@ -159,3 +159,7 @@ h5 {
   text-align: center;
   margin: 0;
 }
+
+#choiceTitle {
+  width: 100%;
+}
