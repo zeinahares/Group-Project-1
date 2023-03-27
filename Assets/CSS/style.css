@@ -1,5 +1,12 @@
+/* ZEINA - i added a class for the button elements under the search history so I can target them easier */
+/* the class is .history_item */
+
+*, .btn{
+  font-family: 'Gruppo', cursive;
+}
+
 header {
-  background-color: rgb(58 58 213);
+  background-color: #731DD8;
 }
 
 .row {
@@ -14,7 +21,7 @@ h1 {
 }
 
 nav {
-  background-color: gray;
+  background-color: #D4B483;
   height: 40px;
 }
 
@@ -30,76 +37,118 @@ nav .input-field label i {
   transition: color .3s;
 }
 
-nav .input-field input:focus+label i {
-  /* sets search icon to be hidden */
-  color: white !important;
+#search{
+  background-color: white;
 }
 
 #search-form {
   padding-left: 10px;
 }
 
-  #search-form input { /* makes search bar much prettier */
-    border-radius: 10px;
-    height: 30px;
-  }
+#search-form input {
+  /* makes search bar much prettier */
+  border-radius: 10px;
+  height: 30px;
+}
 
-  #search-form i {
-    height: 30px;
-    line-height: 30px; /* positions search icon */
-  }
+#search-form i {
+  height: 30px;
+  line-height: 30px;
+  /* positions search icon */
+}
 
-  #search-form button { /* makes search btn much prettier */
-    border-radius: 10px; 
-    height: 30px;
-    margin-left: 5px;
-  }
+#search-form button {
+  /* makes search btn much prettier */
+  border-radius: 10px;
+  height: 30px;
+  margin-left: 15px;
+}
+
+.nav-card .btn {
+  border-radius: 10px;
+  height: 30px;
+  margin-left: 15px;
+  background-color: red;
+}
 
 .nav-card {
-  background-color: rgb(58 58 213);
-  height: calc(100vh - 150px); /* makes nav-car (search history) full height of page */
+  height: calc(100vh - 150px);
+  /* makes nav-car (search history) full height of page */
   padding: 0px;
 }
+
+.history{
+  background-color: #48A9A6;
+}
+
+.history_item{
+  background-color: #D4B483;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  margin-left: 15px;
+}
+
+.short-list{
+  background-color: #C1666B;
+}
+
+/* .nav-container{
+  display: flex;
+  justify-content: space-between;
+} */
 
 li {
   list-style: none;
   padding-left: 10px;
-  line-height: 40px; /* sets distance between a tags */
+  line-height: 40px;
+  /* sets distance between a tags */
 }
 
 .card-title {
   text-align: center;
-  margin: 0;  /* removes space between nav-card and search input */
-  font-size: 36px;
+  margin: 0;
+  /* removes space between nav-card and search input */
+  font-size: 26px;
   padding-bottom: 10px;
   color: black;
 }
 
-.flex-container { /* flexbox for mvoies */
+body{
+  background-color: #E4DFDA;
+}
+
+.flex-container {
+  /* flexbox for movies */
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-between;
+  justify-content: flex-start;
 }
 
-.card .card-image .card-title { /* card-title had a default position: absolute; */
+.card .card-image .card-title {
+  /* card-title had a default position: absolute; */
   position: unset;
-  color: black;
 }
 
-.card { /* helps with spacing of cards (posters) */
+.card {
+  /* helps with spacing of cards (posters) */
   width: calc(25% - 20px);
   margin: 10px;
 }
 
 .card .btn,
-.btn-small i.material-icons { /* styles the thumbs up */
+.btn-small i.material-icons {
+  /* styles the thumbs up */
   background-color: white;
   color: blue;
 }
 
+.heart {
+  box-shadow: none;
+}
+
 footer {
-  background-color: gray;
+  background-color: #731DD8
 }
 
 h5 {
