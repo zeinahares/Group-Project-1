@@ -280,8 +280,25 @@ function printMovie (movieRequestURL){
     var genre = data.Genre;
     var country = data.Country;
     var movieAwards = data.Awards;
-    
+
+
+    const moviePage= document.getElementById('moviepage') 
+    var pageCard= $('<div class=card>')
+    var titleEl= $('<h2>');
+    var subTitelEl=$('<h3>');
+    var pEl= $('<p>');
+    var brEl= $('<br>');
+
+    $(moviePage).append(pageCard)
+    $(pageCard).append(titleEl, pEl)
+    $(titleEl).append(titleMovie)
+    $(subTitelEl).append(yearRelease,brEl,Ratings, brEl, durationMovie, brEl,
+      language)
+    $(pEl).append(descriptionMovie,brEl,movieDirector,actors,brEl,
+      genre,country,movieAwards)
+
   });
+
 
 }
 
