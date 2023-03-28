@@ -188,7 +188,7 @@ h5 {
 #moviepage {
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 20px;
 }
 
 .titlecard {
@@ -207,4 +207,8 @@ h5 {
 h3 {
   margin: -0.053333rem 0 1.168rem 0;
   text-align: center;
+}
+
+p {
+  font-size: 125%;
 }
