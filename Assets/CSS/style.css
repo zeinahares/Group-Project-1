@@ -92,6 +92,14 @@ nav .input-field label i {
 
 .history{
   background-color: #48A9A6;
+  width: 62%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 10px;
+  padding-right: 5px;
 }
 
 .history_item{
@@ -104,6 +112,15 @@ nav .input-field label i {
 
 .short-list{
   background-color: #C1666B;
+  width: 550%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 10px;
+  padding-left: 5px;
+  padding-right: 10px;
 }
 
 /* .nav-container{
@@ -182,7 +199,7 @@ h5 {
 
 #home-btn {
   position: relative;
-  right: -41%;
+  right: -8%;
 }
 
 #moviepage {
@@ -211,4 +228,30 @@ h3 {
 
 p {
   font-size: 125%;
+}
+
+.pageload{
+  width: 67%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  position: relative;
+  left: -108px;
+}
+
+.favourites {
+  position: absolute;
+  right: 53px;
+  top: 199px;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.nav-card{
+
+  height: calc(100vh - 40px);
 }

@@ -110,7 +110,14 @@ function fetchmoviesList(movieListrequestURL) {
 
             var thumbClickedTitle = thumbClicked.attr("title");
             if (titleFavArr.includes(thumbClickedTitle) !== true) {
-              titleFavArr.push(thumbClickedTitle);
+              var movieID = $(event.target).val();
+
+              var favObj = {
+                Title: thumbClickedTitle,
+                ID: movieID,
+              }
+
+              titleFavArr.push(favObj);
             }
 
             storeFavTitles();
@@ -277,6 +284,7 @@ function renderHomePage() {
 renderHomePage();
 // ZEINA - event listner display moviesList from history print
 $(document).on('click', '.history_item', historyRequestURL);
+$(document).on('click', '.fav-btn', movieClickURL);
 
 $('#home-btn').on('click', renderHomePage);
 
@@ -288,11 +296,16 @@ function addFavBtn() {
   var length = titleFavArr ? titleFavArr.length : 0;
 
   for (var i = 0; i < length; i++) {
-    var favBtn = $("<li>");
+    var favBtn = $("<button class='fav-btn'>");
     var deleteFavBtn = $("<button>");
 
     favBtn.attr("data-index", i);
-    favBtn.text(titleFavArr[i]);
+    favBtn.text(titleFavArr[i].Title);
+
+    var movieID = titleFavArr[i].ID;
+
+    favBtn.val(movieID);
+    console.log(favBtn.val());
 
     deleteFavBtn.text("X");
     deleteFavBtn.attr("class", "delete-fab-btn");
@@ -483,6 +496,8 @@ function printMovie(movieRequestURL) {
       var country = data.Country;
       var movieAwards = data.Awards;
       var posterMovie = data.Poster;
+      var movieID = data.imdbID;
+
 
 
       var moviePage = $('#moviepage');
@@ -499,11 +514,13 @@ function printMovie(movieRequestURL) {
       var countryEl = $('<p>');
       var AwardsEl = $('<p>');
       var favouritesHeart = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+      
+      favouritesHeart.val(movieID);
       moviePage.append(pageCard);
 
       imgEl.attr('src', posterMovie);
 
-      titleEl.text(titleMovie + '(' + yearRelease + ')');
+      titleEl.text(titleMovie + ' (' + yearRelease + ')');
       title2El.text('Ratings: ' + Ratings);
 
       durationEl.text('Duration: ' + durationMovie);
