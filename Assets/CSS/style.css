@@ -237,12 +237,12 @@ p {
   flex-wrap: wrap;
   flex-direction: row;
   position: relative;
-  left: -108px;
+  left: -118px;
 }
 
 .favourites {
   position: absolute;
-  right: 53px;
+  right: 60px;
   top: 199px;
 }
 
