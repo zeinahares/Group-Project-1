@@ -7,6 +7,7 @@
 *, 
 .btn{
   font-family: 'Gruppo', cursive;
+  font-weight: bold;
 }
 
 header {
@@ -22,6 +23,14 @@ h1 {
   text-align: center;
   margin: 0;
   font-size: 86px;
+}
+
+h2 {
+  margin: 1.373333rem 0 1.424rem 0;
+  padding-left: 10px;
+  font-weight: bold;
+  padding-top: 2px;
+  padding-bottom: 1px;
 }
 
 nav {
@@ -132,12 +141,18 @@ body{
 .card .card-image .card-title {
   /* card-title had a default position: absolute; */
   position: unset;
+  color: black;
+  font-weight: bold;
 }
 
 .card {
   /* helps with spacing of cards (posters) */
   width: calc(25% - 20px);
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .card .btn,
@@ -163,4 +178,33 @@ h5 {
 
 #choiceTitle {
   width: 100%;
+}
+
+#home-btn {
+  position: relative;
+  right: -41%;
+}
+
+#moviepage {
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.titlecard {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.titlecard img {
+  object-fit: scale-down;
+}
+
+h3 {
+  margin: -0.053333rem 0 1.168rem 0;
+  text-align: center;
 }
