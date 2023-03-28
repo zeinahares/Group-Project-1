@@ -23,6 +23,7 @@
 
 <header>
   <h1>CineFile</h1>
+  <h3>Discover over 1,000,000 movies! </h3>
   <nav>
     <!-- why is this div the full width of the page? -->
     <div class="row">
@@ -33,11 +34,12 @@
             for="search">Submit</button>
         </div>
       </form>
+      <button id="home-btn" class="btn col s4 #1976d2 blue darken-2"> Home </button>
     </div>
 
 
     <div class="nav-container">
-      <div class="row" style="margin-bottom: 0;">
+      <div class="row" style="margin-top: 2px;">
         <div class="col s12 m3 no-padding">
           <div class="nav-card history">
             <h2 class="card-title" style="display: inline;">Search History</h2>
@@ -74,21 +76,28 @@
     <div class="card">
       <div class="card-image">
         <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-        <span class="card-title">Movie Title</span>
+        <h2 class="card-title">Movie Title</h2>
         <button class="heart btn" type="favorite" name="action"><i class="material-icons">favorite</i></button>
       </div>
     </div>
     <div class="card">
       <div class="card-image">
         <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-        <span class="card-title">Movie Title</span>
+        <h2 class="card-title">Movie Title</h2>
         <button class="heart btn" type="favorite" name="action"><i class="material-icons">favorite</i></button>
       </div>
     </div>
     <div class="card">
       <div class="card-image">
         <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-        <span class="card-title">Movie Title</span>
+        <h2 class="card-title">Movie Title</h2>
+        <button class="heart btn" type="favorite" name="action"><i class="material-icons">favorite</i></button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
+        <h2 class="card-title">Movie Title</h2>
         <button class="heart btn" type="favorite" name="action"><i class="material-icons">favorite</i></button>
       </div>
     </div>
@@ -96,7 +105,7 @@
  
 
   <div class="col s9 flex-container" id="moviepage">
-    <div class="card"></div>
+    <div class="titlecard"></div>
   </div>
 
 
@@ -105,7 +114,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="./Assets/JS/script.js"></script>
 
-  <script>
+  <!-- <script>
     const searchInput = document.querySelector('#search');
     const searchIcon = document.querySelector('#search-icon');
 
@@ -119,7 +128,7 @@
       var options = {};
       var instances = M.Dropdown.init(elems, options);
     });
-  </script>
+  </script> -->
 
 </body>
 
