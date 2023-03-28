@@ -52,10 +52,21 @@ function fetchmoviesList(movieListrequestURL) {
 
         var movieID = data.Search[i].imdbID;
 
-        var favouritesHeart = $('<button class="btn save-btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+        var favouritesButton = $('<button class="btn save-btn" type="thumb-up" name="action">');
+        var favouritesHeart = $('<i>')
+
+        favouritesHeart.addClass("material-icons");
+        
+        favouritesHeart.text('favorite');
+        favouritesButton.append(favouritesHeart);
+
         favouritesHeart.attr("title", movieTitle);
+        favouritesButton.attr("title", movieTitle);
+
         favouritesHeart.val(movieID);
+        favouritesButton.val(movieID);
         favouritesHeart.attr("ID", movieID);
+        favouritesButton.attr("ID", movieID);
 
         // favouritesHeart.val(movieID);
         // create a div with .card
@@ -92,7 +103,7 @@ function fetchmoviesList(movieListrequestURL) {
 
         cardImage.append(movieTitleEl);
 
-        cardImage.append(favouritesHeart);
+        cardImage.append(favouritesButton);
 
 
 
@@ -181,10 +192,21 @@ function renderHomePage() {
         var moviePoster = data.Poster;
         var movieID = data.imdbID;;
 
-        var favouritesHeart = $('<button class="btn save-btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+        var favouritesButton = $('<button class="btn save-btn" type="thumb-up" name="action">');
+        var favouritesHeart = $('<i>')
+
+        favouritesHeart.addClass("material-icons");
+        
+        favouritesHeart.text('favorite');
+        favouritesButton.append(favouritesHeart);
+
         favouritesHeart.attr("title", movieTitle);
-        favouritesHeart.attr("id", movieID);
+        favouritesButton.attr("title", movieTitle);
+
         favouritesHeart.val(movieID);
+        favouritesButton.val(movieID);
+        favouritesHeart.attr("ID", movieID);
+        favouritesButton.attr("ID", movieID);
 
         var newCard = $("<div class= 'card'>");
         newCard.val(movieID);
@@ -210,10 +232,10 @@ function renderHomePage() {
 
         cardImage.append(movieTitleEl);
 
-        cardImage.append(favouritesHeart);
+        cardImage.append(favouritesButton);
         initFavScreen();
       });
-
+  
   }
 
   $('#movieslist').removeClass('hide');
@@ -431,6 +453,7 @@ function handleRemoveAllFavItem(event) {
   titleFavArr.splice(0);
   $('#short-list').children().remove();
   storeFavTitles();
+  $('.save-btn').children().removeClass('clicked-fav');
 }
 
 $('#short-list').on("click", ".delete-fab-btn", handleRemoveFavItem);
@@ -447,28 +470,34 @@ function handleShortList(event) {
   console.log('thumb clicked is')
   console.log(thumbClicked);
 
-  if (thumbClicked.is("button") === true) {
-    var thumbClickedTitle = thumbClicked.attr("title");
-    var thumbClickedId = thumbClicked.attr("ID");
+  console.log("class name is")
+  console.log(thumbClicked[0].className);
 
-    var favObj = {
-      title: thumbClickedTitle,
-      ID: thumbClickedId,
-    }
+  // check if you're clicking on the heart
+  if (thumbClicked[0].className.includes("material-icons")){
 
-    titleFavArr.push(favObj);
-    storeFavTitles();
-    addFavBtn();
+    if (thumbClicked[0].className.includes("material-icons")) {
 
+      var thumbClickedTitle = thumbClicked.attr("title");
 
+      // var thumbClickedId = thumbClicked.attr("ID");
+      var thumbClickedId = thumbClicked.val();
 
-    // check if material-icons has class clicked fav & add class
-    // material icons doesnt have an id, button has id and you cant give 2 IDs 
-    // - unless you turn the id movieID into a class?
-    // idea - can you check the parent's id? 
-    if (thumbClicked.hasClass("material-icons")) {
+      var favObj = {
+        title: thumbClickedTitle,
+        ID: thumbClickedId,
+      }
+
+      titleFavArr.push(favObj);
+      storeFavTitles();
+      addFavBtn();
+
       console.log('material if');
-      if (thumbClicked.hasClass("clicked-fav")) {
+
+      var classNames = thumbClicked[0].className
+      if (classNames.includes("clicked-fav")) {
+        console.log('clicked fav if');
+
         thumbClicked.removeClass("clicked-fav");
         var index = thumbClicked.attr("title");
         titleFavArr.splice(index, 1);
@@ -479,10 +508,27 @@ function handleShortList(event) {
         storeFavTitles();
         console.log("work")
       } else {
-        thumbClicked.addClass("clicked-fav");
 
+        thumbClicked.addClass("clicked-fav");
+        addFavBtn();
+        storeFavTitles();
       }
     }
+    // check if you're clicking on the button
+  } else if (thumbClicked.is("button") === true) {
+    var thumbClickedTitle = thumbClicked.attr("title");
+
+    var thumbClickedId = thumbClicked.attr("ID");
+    // var thumbClickedId = thumbClicked.val();
+
+    var favObj = {
+      title: thumbClickedTitle,
+      ID: thumbClickedId,
+    }
+
+    titleFavArr.push(favObj);
+    storeFavTitles();
+    addFavBtn();
 
     if (thumbClicked.children().hasClass("clicked-fav")) {
       thumbClicked.children().removeClass("clicked-fav");
@@ -499,24 +545,6 @@ function handleShortList(event) {
       thumbClicked.children().addClass("clicked-fav");
 
     }
-
-    // for (let i = 0; i < titleFavArr.length; i++) {
-    //   console.log("HERE!!!", titleFavArr[i].ID)
-    //   var searchedItem = `#${titleFavArr[i].ID}`
-    //   // console.log(searchedItem)
-    //   var hi = $(searchedItem)
-    //   console.log(hi)
-    //   hi.children().addClass("clicked-fav");
-
-    //   // $(".save-btn").children().removeClass("clicked-fav");
-
-    // }
-
-
-    // if (titleFavArr.includes(thumbClickedTitle) === true) {
-    //   thumbClicked.children().addClass("clicked-fav");
-    // }
-
   }
 
 }
@@ -576,9 +604,22 @@ function printMovie(movieRequestURL) {
       var genreEl = $('<p>');
       var countryEl = $('<p>');
       var AwardsEl = $('<p>');
-      var favouritesHeart = $('<button class="btn save-btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+
+      var favouritesButton = $('<button class="btn save-btn" type="thumb-up" name="action">');
+      var favouritesHeart = $('<i>')
+
+      favouritesHeart.addClass("material-icons");
+      
+      favouritesHeart.text('favorite');
+      favouritesButton.append(favouritesHeart);
+
+      favouritesHeart.attr("title", titleMovie);
+      favouritesButton.attr("title", titleMovie);
+
       favouritesHeart.val(movieID);
-      favouritesHeart.attr("id", movieID);
+      favouritesButton.val(movieID);
+      favouritesHeart.attr("ID", movieID);
+      favouritesButton.attr("ID", movieID);
 
       moviePage.append(pageCard);
 
@@ -600,7 +641,7 @@ function printMovie(movieRequestURL) {
 
       // the append is now split into two so that the ratings can go inbetween the heart button
       // and the duration
-      pageCard.append(imgEl, titleEl, favouritesHeart);
+      pageCard.append(imgEl, titleEl, favouritesButton);
 
       // Ratings sometimes is not an array
       // if not array save results differently
