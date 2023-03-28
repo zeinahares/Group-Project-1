@@ -456,7 +456,10 @@ function handleShortList(event) {
 
 
 
-
+    // check if material-icons has class clicked fav & add class
+    // material icons doesnt have an id, button has id and you cant give 2 IDs 
+    // - unless you turn the id movieID into a class?
+    // idea - can you check the parent's id? 
     if (thumbClicked.hasClass("material-icons")) {
       console.log('material if');
       if (thumbClicked.hasClass("clicked-fav")) {
@@ -540,8 +543,6 @@ function printMovie(movieRequestURL) {
 
       var titleMovie = data.Title;
       var yearRelease = data.Released;
-      // need to work
-      var Ratings = data.Ratings[0].Value;
 
       var durationMovie = data.Runtime;
       var language = data.Language;
@@ -560,7 +561,7 @@ function printMovie(movieRequestURL) {
       var imgEl = $('<img>');
       var pageCard = $('<div class="titlecard">');
       var titleEl = $('<h2>');
-      var title2El = $('<h3>');
+
       var durationEl = $('<p>');
       var languageEl = $('<p>');
       var pEl = $('<p>');
@@ -578,7 +579,6 @@ function printMovie(movieRequestURL) {
       imgEl.attr('src', posterMovie);
 
       titleEl.text(titleMovie + ' (' + yearRelease + ')');
-      title2El.text('Ratings: ' + Ratings);
 
       durationEl.text('Duration: ' + durationMovie);
       languageEl.text('Language: ' + language);
@@ -592,8 +592,33 @@ function printMovie(movieRequestURL) {
       countryEl.text('Country: ' + country);
       AwardsEl.text('Awards: ' + movieAwards + '.');
 
-      pageCard.append(imgEl, titleEl, favouritesHeart, title2El, durationEl, languageEl, pEl, dirEl,
-        actorsEl, genreEl, countryEl, AwardsEl);
+      pageCard.append(imgEl, titleEl, favouritesHeart);
+        
+      // Ratings sometimes is not an array
+      // if not array save results differently
+      if (Array.isArray(data.Ratings)) {
+        console.log('Rating is an array');
+
+        // and sometimes its an Array of 0
+        // if so, skip appending this element
+        if (data.Ratings.length != 0) {
+          var Ratings = data.Ratings[0].Value;
+          var title2El = $('<h3>');
+          title2El.text('Ratings: ' + Ratings);
+          pageCard.append(title2El);
+
+        }
+
+      } else if (data.Ratings.Value) {
+        var Ratings = data.Ratings.Value;
+        console.log('Rating is NOT an array');
+        var title2El = $('<h3>');
+        title2El.text('Ratings: ' + Ratings);
+        pageCard.append(title2El);
+
+      }
+
+      pageCard.append(durationEl, languageEl, pEl, dirEl, actorsEl, genreEl, countryEl, AwardsEl);
 
       favouritesHeart.attr("title", titleMovie);
       favouritesHeart.attr("ID", movieID);
