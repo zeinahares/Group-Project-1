@@ -183,6 +183,7 @@ function renderHomePage() {
 
         var favouritesHeart = $('<button class="btn save-btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
         favouritesHeart.attr("title", movieTitle);
+        favouritesHeart.attr("id", movieID);
         favouritesHeart.val(movieID);
 
         var newCard = $("<div class= 'card'>");
@@ -431,11 +432,14 @@ $('#delete-all-fab-btn').on("click", handleRemoveAllFavItem);
 
 
 $(document).on('click', '.save-btn', handleShortList);
+$(document).on('click', '.material-icons', handleShortList);
 
 function handleShortList(event) {
 
   event.stopPropagation();
   var thumbClicked = $(event.target);
+  console.log('thumb clicked is')
+  console.log(thumbClicked);
 
   if (thumbClicked.is("button") === true) {
     var thumbClickedTitle = thumbClicked.attr("title");
@@ -452,6 +456,24 @@ function handleShortList(event) {
 
 
 
+
+    if (thumbClicked.hasClass("material-icons")) {
+      console.log('material if');
+      if (thumbClicked.hasClass("clicked-fav")) {
+        thumbClicked.removeClass("clicked-fav");
+        var index = thumbClicked.attr("title");
+        titleFavArr.splice(index, 1);
+        var index2 = thumbClicked.attr("ID");
+        titleFavArr.splice(index2, 1);
+
+        addFavBtn();
+        storeFavTitles();
+        console.log("work")
+      } else {
+        thumbClicked.addClass("clicked-fav");
+
+      }
+    }
 
     if (thumbClicked.children().hasClass("clicked-fav")) {
       thumbClicked.children().removeClass("clicked-fav");
@@ -531,6 +553,8 @@ function printMovie(movieRequestURL) {
       var movieAwards = data.Awards;
       var posterMovie = data.Poster;
       var movieID = data.imdbID;
+
+
 
       var moviePage = $('#moviepage');
       var imgEl = $('<img>');

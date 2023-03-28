@@ -1,5 +1,5 @@
-*,
-.btn {
+*, 
+.btn{
   font-family: 'Gruppo', cursive;
   font-weight: bold;
 }
@@ -92,7 +92,7 @@ nav .input-field label i {
 }
 
 .fav-btn,
-.history_item {
+.history_item{
   background-color: #D4B483;
   color: white;
   border-radius: 10px;
@@ -170,7 +170,7 @@ body {
 }
 
 /* big movie page */
-.titlecard {
+.titlecard { 
   background-color: white;
   /* flex positions the poster */
   display: flex;
@@ -198,7 +198,7 @@ p {
   color: #C1666B;
 }
 
-/* .pageload {
+/* .pageload{
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -219,17 +219,15 @@ p {
 } */
 
 @media screen and (max-width: 768px) {
-
-  .no-padding,
-  .pageload {
+  .no-padding, .pageload {
     display: flex;
     flex-direction: column;
-
+    
   }
 
   .short-list {
     order: 1;
-
+ 
   }
 
   .flex-container {
