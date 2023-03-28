@@ -382,6 +382,7 @@ input.on("keypress", function (event) {
 });
 
 function handleRemoveItem(event) {
+  event.stopPropagation();
   var btnClicked = $(event.target);
 
   if (btnClicked.is("button") === true) {
@@ -394,7 +395,7 @@ function handleRemoveItem(event) {
 
 function handleRemoveAllItem(event) {
   console.log("delete")
-  event.preventDefault();
+  event.stopPropagation();
   titleArr.splice(0);
   titleList.children().remove();
   storeTitles();
@@ -408,20 +409,25 @@ function handleRemoveFavItem(event) {
 
   if (deleteFabBtnClicked.is("button") === true) {
     var index = deleteFabBtnClicked.parent().attr("data-index");
+
+    var IDSaveBtn = `#${titleFavArr[index].ID}`;
+
+    var selectedSaveBtn = $(IDSaveBtn)
+    console.log('selected SaveBTn')
+    console.log(selectedSaveBtn);
+
+    selectedSaveBtn.children().removeClass("clicked-fav");
+
     titleFavArr.splice(index, 1);
 
     addFavBtn();
     storeFavTitles();
 
-    if ($('.save-btn').children().hasClass("clicked-fav")) {
-      $('.save-btn').children().removeClass("clicked-fav")
-    }
-
   }
 }
 
 function handleRemoveAllFavItem(event) {
-  event.preventDefault();
+  event.stopPropagation();
   titleFavArr.splice(0);
   $('#short-list').children().remove();
   storeFavTitles();
@@ -592,8 +598,10 @@ function printMovie(movieRequestURL) {
       countryEl.text('Country: ' + country);
       AwardsEl.text('Awards: ' + movieAwards + '.');
 
+      // the append is now split into two so that the ratings can go inbetween the heart button
+      // and the duration
       pageCard.append(imgEl, titleEl, favouritesHeart);
-        
+
       // Ratings sometimes is not an array
       // if not array save results differently
       if (Array.isArray(data.Ratings)) {
