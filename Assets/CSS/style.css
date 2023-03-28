@@ -1,12 +1,7 @@
-/* ZEINA - i added a class for the button elements under the search history so I can target them easier */
-/* the class is .history_item */
-
-/* ZEINA - i added a class for the button elements under the search history so I can target them easier */
-/* the class is .history_item */
-
 *,
 .btn {
   font-family: 'Gruppo', cursive;
+  font-weight: bold;
 }
 
 header {
@@ -22,6 +17,14 @@ h1 {
   text-align: center;
   margin: 0;
   font-size: 86px;
+}
+
+h2 {
+  margin: 0 0 1.424rem 0;
+  padding-left: 10px;
+  font-weight: bold;
+  padding-top: 2px;
+  padding-bottom: 1px;
 }
 
 nav {
@@ -55,12 +58,6 @@ nav .input-field label i {
   height: 30px;
 }
 
-#search-form i {
-  height: 30px;
-  line-height: 30px;
-  /* positions search icon */
-}
-
 #search-form button {
   /* makes search btn much prettier */
   border-radius: 10px;
@@ -72,48 +69,58 @@ nav .input-field label i {
   border-radius: 10px;
   height: 30px;
   margin-left: 15px;
+  margin-bottom: 20px;
   background-color: red;
 }
 
 .nav-card {
-  height: calc(100vh - 150px);
+  height: calc(100vh - 40px);
   /* makes nav-car (search history) full height of page */
   padding: 0px;
 }
 
 .history {
   background-color: #48A9A6;
+  /* width: 62%; */
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  align-items: stretch;
+  gap: 10px;
+  padding-right: 5px;
 }
 
+.fav-btn,
 .history_item {
   background-color: #D4B483;
   color: white;
   border-radius: 10px;
   height: 30px;
   margin-left: 15px;
+  height: auto;
+  text-align: start;
 }
 
 .short-list {
   background-color: #C1666B;
+  /* width: 100%; */
+  gap: 10px;
+  padding-left: 5px;
+  padding-right: 10px;
 }
-
-/* .nav-container{
-  display: flex;
-  justify-content: space-between;
-} */
 
 li {
   list-style: none;
   padding-left: 10px;
   line-height: 40px;
-  /* sets distance between a tags */
+  /* sets distance between li */
 }
 
 .card-title {
   text-align: center;
   margin: 0;
-  /* removes space between nav-card and search input */
-  font-size: 26px;
+  font-size: 46px;
   padding-bottom: 10px;
   color: black;
 }
@@ -123,7 +130,7 @@ body {
 }
 
 .flex-container {
-  /* flexbox for movies */
+  /* flexbox for movies. Needed! */
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -132,39 +139,103 @@ body {
 .card .card-image .card-title {
   /* card-title had a default position: absolute; */
   position: unset;
+  color: black;
+  font-weight: bold;
 }
 
 .card {
-  /* helps with spacing of cards (posters) */
+  /* helps with spacing of posters within cards. needed! */
   width: calc(25% - 20px);
   margin: 10px;
-}
-
-.card .btn,
-.btn-small i.material-icons {
-  /* styles the thumbs up */
-  background-color: white;
-  color: blue;
-}
-
-.heart {
-  box-shadow: none;
-}
-
-footer {
-  background-color: #731DD8
-}
-
-h5 {
-  font-size: 18px;
-  text-align: center;
-  margin: 0;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; */
 }
 
 #choiceTitle {
+  /* keeps movies below title */
   width: 100%;
+}
+
+#home-btn {
+  position: relative;
+  right: -8%;
+}
+
+#moviepage {
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* big movie page */
+.titlecard {
+  background-color: white;
+  /* flex positions the poster */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.titlecard img {
+  /* reduces width of poster */
+  object-fit: scale-down;
+}
+
+h3 {
+  margin: -0.053333rem 0 1.168rem 0;
+  text-align: center;
+}
+
+p {
+  font-size: 125%;
 }
 
 .clicked-fav {
   color: #C1666B;
+}
+
+/* .pageload {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  position: relative;
+} */
+
+/* .container {
+  display: flex;
+  flex-direction: column;
+}
+
+.short-list {
+  order: 1;
+}
+
+.flex-container {
+  order: 2;
+} */
+
+@media screen and (max-width: 768px) {
+
+  .no-padding,
+  .pageload {
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .short-list {
+    order: 1;
+
+  }
+
+  .flex-container {
+    order: 2;
+    float: left;
+    justify-content: flex-start;
+    width: 100%;
+  }
 }

@@ -54,6 +54,7 @@ function fetchmoviesList(movieListrequestURL) {
 
         var favouritesHeart = $('<button class="btn save-btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
         favouritesHeart.attr("title", movieTitle);
+        favouritesHeart.val(movieID);
         favouritesHeart.attr("ID", movieID);
 
         // favouritesHeart.val(movieID);
@@ -82,7 +83,7 @@ function fetchmoviesList(movieListrequestURL) {
 
         // create a title with title & year & append child to div newCard
 
-        var movieTitleEl = $("<span class='card-title'>");
+        var movieTitleEl = $("<h2 class='card-title'>");
 
         movieTitleEl.text(movieTitle + ' (' + movieYear + ')');
         // movie title element now contains its ID as a value
@@ -150,9 +151,81 @@ function historyRequestURL() {
 
 }
 
+
+// ZEINA - Rendering HomePage with developer's choices
+function renderHomePage() {
+
+  var developerChoices = ['tt0120601', 'tt0822832', 'tt0097814', 'tt0261392'];
+
+
+  $('#movieslist').html("");
+  $('#moviepage').html("");
+  var choiceTitle = $('<h2 id="choiceTitle">');
+  choiceTitle.text("Developers' Choice");
+
+  $('#movieslist').append(choiceTitle);
+
+  // all requests are nested in one so that they can all load together
+  for (var i = 0; i < developerChoices.length; i++) {
+    var developerRequestURL = baseURLOMDb + 'i=' + developerChoices[i] + OMDbAPIParameter;
+
+    fetch(developerRequestURL)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+
+        var movieTitle = data.Title;
+        var movieYear = data.Released;
+        var moviePoster = data.Poster;
+        var movieID = data.imdbID;;
+
+        var favouritesHeart = $('<button class="btn save-btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+        favouritesHeart.attr("title", movieTitle);
+        favouritesHeart.val(movieID);
+
+        var newCard = $("<div class= 'card'>");
+        newCard.val(movieID);
+
+        $('#movieslist').append(newCard);
+        var cardImage = $("<div class = 'card-image'>");
+        newCard.append(cardImage);
+        // create img with poster URL & append child to div newCard
+        var movieposterEl = $('<img>');
+        movieposterEl.attr('src', moviePoster);
+        movieposterEl.val(movieID);
+
+        cardImage.append(movieposterEl);
+        cardImage.val(movieID);
+
+        // create a title with title & year & append child to div newCard
+
+        var movieTitleEl = $("<h2 class='card-title'>");
+        movieTitleEl.text(movieTitle + ' (' + movieYear + ')');
+        // movie title element now contains its ID as a value
+        // so when the div is clicked, its value can be retrieved without being seen on the HTML
+        movieTitleEl.val(movieID);
+
+        cardImage.append(movieTitleEl);
+
+        cardImage.append(favouritesHeart);
+        initFavScreen();
+      });
+
+  }
+
+  $('#movieslist').removeClass('hide');
+  $('#moviepage').addClass('hide');
+  $('#choiceTitle').removeClass('hide');
+}
+
+renderHomePage();
 // ZEINA - event listner display moviesList from history print
 $(document).on('click', '.history_item', historyRequestURL);
+$(document).on('click', '.fav-btn', movieClickURL);
 
+$('#home-btn').on('click', renderHomePage);
 $(document).on('click', '.fav-btn', movieClickURL);
 
 var titleFavArr = [];
@@ -438,13 +511,16 @@ function printMovie(movieRequestURL) {
     .then(function (data) {
       console.log(data);
 
+      $("#movieslist").html("");
       $('#moviepage').html("");
       $('#moviepage').removeClass('hide');
       $('#movieslist').addClass('hide');
 
       var titleMovie = data.Title;
       var yearRelease = data.Released;
+      // need to work
       var Ratings = data.Ratings[0].Value;
+
       var durationMovie = data.Runtime;
       var language = data.Language;
       var descriptionMovie = data.Plot;
@@ -477,13 +553,13 @@ function printMovie(movieRequestURL) {
 
       imgEl.attr('src', posterMovie);
 
-      titleEl.text('Plot: ' + titleMovie + '(' + yearRelease + ')');
+      titleEl.text(titleMovie + ' (' + yearRelease + ')');
       title2El.text('Ratings: ' + Ratings);
 
       durationEl.text('Duration: ' + durationMovie);
       languageEl.text('Language: ' + language);
 
-      pEl.text('Description: ' + descriptionMovie);
+      pEl.text('Plot: ' + descriptionMovie);
       dirEl.text('Director: ' + movieDirector + '.');
 
       actorsEl.text('Actors: ' + actors + '.');
