@@ -37,7 +37,14 @@ nav {
   /* removes default padding from nav-card */
 }
 
-#search{
+nav .input-field label i {
+  /* sets search icon to be displayed */
+  color: black;
+  -webkit-transition: color .3s;
+  transition: color .3s;
+}
+
+#search {
   background-color: white;
 }
 
@@ -72,7 +79,7 @@ nav {
   padding: 0px;
 }
 
-.history{
+.history {
   background-color: #48A9A6;
   /* width: 62%; */
   display: flex;
@@ -95,7 +102,7 @@ nav {
   text-align: start;
 }
 
-.short-list{
+.short-list {
   background-color: #C1666B;
   /* width: 100%; */
   gap: 10px;
@@ -118,7 +125,7 @@ li {
   color: black;
 }
 
-body{
+body {
   background-color: #E4DFDA;
 }
 
@@ -185,6 +192,10 @@ h3 {
 
 p {
   font-size: 125%;
+}
+
+.clicked-fav {
+  color: #C1666B;
 }
 
 /* .pageload{
