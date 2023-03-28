@@ -52,8 +52,11 @@ function fetchmoviesList(movieListrequestURL) {
 
         var movieID = data.Search[i].imdbID;
 
-        var favouritesHeart = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+        var favouritesHeart = $('<button class="btn save-btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
         favouritesHeart.attr("title", movieTitle);
+        favouritesHeart.attr("ID", movieID);
+
+        // favouritesHeart.val(movieID);
         // create a div with .card
 
         var newCard = $("<div class= 'card'>");
@@ -90,71 +93,13 @@ function fetchmoviesList(movieListrequestURL) {
 
         cardImage.append(favouritesHeart);
 
-        function initThumbBtn() {
-          initFavScreen();
-          if (titleFavArr.includes(movieTitle) === true) {
-            favouritesHeart.children().addClass("clicked-fav");
-            console.log("init thumb")
-
-          }
-        }
-        initThumbBtn();
-
-        function handleShortList(event) {
-          event.stopPropagation();
-          var thumbClicked = $(event.target);
-
-          if (thumbClicked.is("button") === true) {
-
-
-            var thumbClickedTitle = thumbClicked.attr("title");
-            if (titleFavArr.includes(thumbClickedTitle) !== true) {
-              titleFavArr.push(thumbClickedTitle);
-            }
-
-            storeFavTitles();
-            addFavBtn();
-
-            thumbClicked.children().toggleClass("clicked-fav");
-
-            if (thumbClicked.children().is(".clicked-fav") !== true) {
-              var index = thumbClicked.attr("data-index");
-              titleFavArr.splice(index, 1);
-              addFavBtn();
-              storeFavTitles();
-
-            }
-
-
-            if (titleFavArr.includes(thumbClickedTitle) === true) {
-              thumbClicked.children().addClass("clicked-fav");
-            }
 
 
 
-            $('#short-list').on("click", ".delete-fab-btn", function (event) {
-              var deleteFabBtnClicked = $(event.target);
-              if (deleteFabBtnClicked.is("button") === true) {
-                if (thumbClicked.children().is(".clicked-fav") === true) {
-                  thumbClicked.children().removeClass('clicked-fav');
-                }
-
-              }
-            });
-
-            $('#delete-all-fab-btn').on("click", function () {
-              if (thumbClicked.children().is(".clicked-fav") === true) {
-                thumbClicked.children().removeClass('clicked-fav');
-              }
-            });
-
-          }
-
-        }
-        favouritesHeart.on('click', handleShortList);
       };
 
       $('#search').val('');
+      initFavScreen();
     });
 
 }
@@ -208,20 +153,41 @@ function historyRequestURL() {
 // ZEINA - event listner display moviesList from history print
 $(document).on('click', '.history_item', historyRequestURL);
 
+$(document).on('click', '.fav-btn', movieClickURL);
 
 var titleFavArr = [];
 var storageFavKey = "Fav Movie Title";
 
+
+$(document).on("click", ".delete-fab-btn", function (event) {
+  event.stopPropagation();
+
+});
+
+$(document).on("click", "#delete-all-fab-btn", function () {
+  var favouritesHeart = $(".save-btn");
+  if (favouritesHeart.children().is(".clicked-fav") === true) {
+    favouritesHeart.children().removeClass('clicked-fav');
+    console.log("ok5?")
+  }
+});
+
 function addFavBtn() {
+
   $("#short-list").html("");
   var length = titleFavArr ? titleFavArr.length : 0;
 
   for (var i = 0; i < length; i++) {
-    var favBtn = $("<li>");
+    var favBtn = $("<button class='fav-btn'>");
     var deleteFavBtn = $("<button>");
 
     favBtn.attr("data-index", i);
-    favBtn.text(titleFavArr[i]);
+    favBtn.text(titleFavArr[i].title);
+
+    var movieID = titleFavArr[i].ID;
+
+    favBtn.val(movieID);
+    console.log(favBtn.val());
 
     deleteFavBtn.text("X");
     deleteFavBtn.attr("class", "delete-fab-btn");
@@ -230,6 +196,7 @@ function addFavBtn() {
     favBtn.append(deleteFavBtn);
   }
 }
+addFavBtn();
 
 function storeFavTitles() {
   localStorage.setItem(storageFavKey, JSON.stringify(titleFavArr));
@@ -240,6 +207,18 @@ function initFavScreen() {
 
   if (storedFavTitle !== null) {
     titleFavArr = storedFavTitle;
+    for (let i = 0; i < titleFavArr.length; i++) {
+      console.log("HERE!!!", titleFavArr[i].ID)
+      var searchedItem = `#${titleFavArr[i].ID}`
+      // console.log(searchedItem)
+      var hi = $(searchedItem)
+      console.log(hi)
+      hi.children().addClass("clicked-fav");
+
+      // $(".save-btn").children().removeClass("clicked-fav");
+
+    }
+    //for all the titles in the array, add class "clicked-fav"
   }
 }
 
@@ -271,6 +250,7 @@ function addTitleBtn() {
 
   }
 }
+addTitleBtn();
 
 function initScreen() {
   var storedTitle = JSON.parse(localStorage.getItem(storageKey));
@@ -285,7 +265,7 @@ $(document).ready(function () {
   initScreen();
   initFavScreen();
   addFavBtn();
-  input.focus();
+
 })
 
 function storeTitles() {
@@ -355,8 +335,13 @@ function handleRemoveFavItem(event) {
   if (deleteFabBtnClicked.is("button") === true) {
     var index = deleteFabBtnClicked.parent().attr("data-index");
     titleFavArr.splice(index, 1);
+
     addFavBtn();
     storeFavTitles();
+
+    if ($('.save-btn').children().hasClass("clicked-fav")) {
+      $('.save-btn').children().removeClass("clicked-fav")
+    }
 
   }
 }
@@ -372,6 +357,65 @@ $('#short-list').on("click", ".delete-fab-btn", handleRemoveFavItem);
 $('#delete-all-fab-btn').on("click", handleRemoveAllFavItem);
 
 
+$(document).on('click', '.save-btn', handleShortList);
+
+function handleShortList(event) {
+
+  event.stopPropagation();
+  var thumbClicked = $(event.target);
+
+  if (thumbClicked.is("button") === true) {
+    var thumbClickedTitle = thumbClicked.attr("title");
+    var thumbClickedId = thumbClicked.attr("ID");
+
+    var favObj = {
+      title: thumbClickedTitle,
+      ID: thumbClickedId,
+    }
+
+    titleFavArr.push(favObj);
+    storeFavTitles();
+    addFavBtn();
+
+
+
+
+    if (thumbClicked.children().hasClass("clicked-fav")) {
+      thumbClicked.children().removeClass("clicked-fav");
+      var index = thumbClicked.children().attr("title");
+      titleFavArr.splice(index, 1);
+      var index2 = thumbClicked.children().attr("ID");
+      titleFavArr.splice(index2, 1);
+
+      addFavBtn();
+      storeFavTitles();
+      console.log("work")
+
+    } else {
+      thumbClicked.children().addClass("clicked-fav");
+
+    }
+
+    // for (let i = 0; i < titleFavArr.length; i++) {
+    //   console.log("HERE!!!", titleFavArr[i].ID)
+    //   var searchedItem = `#${titleFavArr[i].ID}`
+    //   // console.log(searchedItem)
+    //   var hi = $(searchedItem)
+    //   console.log(hi)
+    //   hi.children().addClass("clicked-fav");
+
+    //   // $(".save-btn").children().removeClass("clicked-fav");
+
+    // }
+
+
+    // if (titleFavArr.includes(thumbClickedTitle) === true) {
+    //   thumbClicked.children().addClass("clicked-fav");
+    // }
+
+  }
+
+}
 
 // JEISON -
 // function 2 advent listener for when click image of the poster
@@ -410,7 +454,7 @@ function printMovie(movieRequestURL) {
       var country = data.Country;
       var movieAwards = data.Awards;
       var posterMovie = data.Poster;
-
+      var movieID = data.imdbID;
 
       var moviePage = $('#moviepage');
       var imgEl = $('<img>');
@@ -425,7 +469,10 @@ function printMovie(movieRequestURL) {
       var genreEl = $('<p>');
       var countryEl = $('<p>');
       var AwardsEl = $('<p>');
-      var favouritesHeart = $('<button class="btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+      var favouritesHeart = $('<button class="btn save-btn" type="thumb-up" name="action"><i class="material-icons">favorite</i></button>');
+      favouritesHeart.val(movieID);
+      favouritesHeart.attr("id", movieID);
+
       moviePage.append(pageCard);
 
       imgEl.attr('src', posterMovie);
@@ -448,7 +495,15 @@ function printMovie(movieRequestURL) {
       pageCard.append(imgEl, titleEl, favouritesHeart, title2El, durationEl, languageEl, pEl, dirEl,
         actorsEl, genreEl, countryEl, AwardsEl);
 
+      favouritesHeart.attr("title", titleMovie);
+      favouritesHeart.attr("ID", movieID);
+      console.log("Jeison")
+      initFavScreen();
+
+
+
     });
+  // initFavScreen();
 }
 // and append new items
 
