@@ -109,11 +109,13 @@ nav .input-field label i {
   border-radius: 10px;
   height: 30px;
   margin-left: 15px;
+  height: auto;
+  text-align: start;
 }
 
 .short-list{
   background-color: #C1666B;
-  width: 550%;
+  width: 131%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -122,6 +124,8 @@ nav .input-field label i {
   gap: 10px;
   padding-left: 5px;
   padding-right: 10px;
+  right: -436px;
+  position: relative;
 }
 
 /* .nav-container{
@@ -237,22 +241,20 @@ p {
   flex-wrap: wrap;
   flex-direction: row;
   position: relative;
-  left: -108px;
+  left: -118px;
 }
 
 .favourites {
   position: absolute;
-  right: 53px;
+  right: 0;
   top: 199px;
-}
-
-button {
-  display: flex;
-  align-items: center;
-  border-radius: 5px;
 }
 
 .nav-card{
 
   height: calc(100vh - 40px);
+}
+
+#short-list {
+  width: 100%;
 }
