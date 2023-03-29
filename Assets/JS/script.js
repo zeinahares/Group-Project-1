@@ -2,9 +2,9 @@
 
 var OMDbAPIkey = 'd673ee57';
 var OMDbAPIParameter = '&apikey=d673ee57';
-var baseURLOMDb = 'http://www.omdbapi.com/?';
+var baseURLOMDb = 'https://www.omdbapi.com/?';
 
-var ExamplerequestUrl = 'http://www.omdbapi.com/?i=tt1201607&apikey=d673ee57'; // t = specific title , s = search title, i = id of specific title
+var ExamplerequestUrl = 'https://www.omdbapi.com/?i=tt1201607&apikey=d673ee57'; // t = specific title , s = search title, i = id of specific title
 
 fetch(ExamplerequestUrl)
   .then(function (response) {
