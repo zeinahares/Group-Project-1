@@ -1,9 +1,3 @@
-// Code Questions:
-// CSS framework? choose one and delete the other from html 
-
-// TO RAISE:
-// NEED AN EXTRA FUNCTION FOR WHAT HAPPENS WHEN WE PRESS THE PRINTED the printed search history
-
 // OMDb API: http://www.omdbapi.com/?i=tt3896198&apikey=d673ee57
 
 var OMDbAPIkey = 'd673ee57';
@@ -56,7 +50,7 @@ function fetchmoviesList(movieListrequestURL) {
         var favouritesHeart = $('<i>')
 
         favouritesHeart.addClass("material-icons");
-        
+
         favouritesHeart.text('favorite');
         favouritesButton.append(favouritesHeart);
 
@@ -104,9 +98,6 @@ function fetchmoviesList(movieListrequestURL) {
         cardImage.append(movieTitleEl);
 
         cardImage.append(favouritesButton);
-
-
-
 
       };
 
@@ -196,7 +187,7 @@ function renderHomePage() {
         var favouritesHeart = $('<i>')
 
         favouritesHeart.addClass("material-icons");
-        
+
         favouritesHeart.text('favorite');
         favouritesButton.append(favouritesHeart);
 
@@ -235,7 +226,7 @@ function renderHomePage() {
         cardImage.append(favouritesButton);
         initFavScreen();
       });
-  
+
   }
 
   $('#movieslist').removeClass('hide');
@@ -251,6 +242,8 @@ $(document).on('click', '.fav-btn', movieClickURL);
 $('#home-btn').on('click', renderHomePage);
 $(document).on('click', '.fav-btn', movieClickURL);
 
+// SAWAKO - Savings/removing to local storage + printing fav movies & search history
+
 var titleFavArr = [];
 var storageFavKey = "Fav Movie Title";
 
@@ -260,6 +253,7 @@ $(document).on("click", ".delete-fab-btn", function (event) {
 
 });
 
+// function to remove all favourites when clear all in shortlist is pressed
 $(document).on("click", "#delete-all-fab-btn", function () {
   var favouritesHeart = $(".save-btn");
   if (favouritesHeart.children().is(".clicked-fav") === true) {
@@ -268,6 +262,7 @@ $(document).on("click", "#delete-all-fab-btn", function () {
   }
 });
 
+// function to print all elements in the favoruite titles array
 function addFavBtn() {
 
   $("#short-list").html("");
@@ -294,10 +289,13 @@ function addFavBtn() {
 }
 addFavBtn();
 
+// function to set fav array to local storage
 function storeFavTitles() {
   localStorage.setItem(storageFavKey, JSON.stringify(titleFavArr));
 }
 
+// function to initialise the heart buttons' colors when the pages load
+// if the title is stored in shortlist already, make button red
 function initFavScreen() {
   var storedFavTitle = JSON.parse(localStorage.getItem(storageFavKey));
 
@@ -329,6 +327,8 @@ var deleteAllBtn = $("#delete-all-btn");
 var titleArr = [];
 var storageKey = "Movie Title";
 
+// printing search history array
+
 function addTitleBtn() {
   titleList.html("");
 
@@ -348,6 +348,7 @@ function addTitleBtn() {
 }
 addTitleBtn();
 
+// initialising search history buttons on screen if array is not empty
 function initScreen() {
   var storedTitle = JSON.parse(localStorage.getItem(storageKey));
   if (storedTitle !== null) {
@@ -364,10 +365,12 @@ $(document).ready(function () {
 
 })
 
+// set search history to local storage
 function storeTitles() {
   localStorage.setItem(storageKey, JSON.stringify(titleArr));
 }
 
+// event listener to save search history when submit button is pressed
 searchBtn.on("click", function (event) {
   event.preventDefault();
   console.log("ok");
@@ -384,6 +387,7 @@ searchBtn.on("click", function (event) {
   addTitleBtn();
 });
 
+// event listener to save search history when enter is pressed
 input.on("keypress", function (event) {
   if (event.keyCode === 13) {
     event.preventDefault();
@@ -403,6 +407,8 @@ input.on("keypress", function (event) {
   }
 });
 
+// function to delete search history item using the X next to the search history button
+// remove from local storage and page print
 function handleRemoveItem(event) {
   event.stopPropagation();
   var btnClicked = $(event.target);
@@ -415,6 +421,7 @@ function handleRemoveItem(event) {
   }
 }
 
+// clearing all search history from local storage and page
 function handleRemoveAllItem(event) {
   console.log("delete")
   event.stopPropagation();
@@ -426,6 +433,8 @@ function handleRemoveAllItem(event) {
 titleList.on("click", ".delete-btn", handleRemoveItem);
 deleteAllBtn.on("click", handleRemoveAllItem);
 
+// remove movie title from shortlist using the X next to its name
+// remove from local storange and print on page
 function handleRemoveFavItem(event) {
   var deleteFabBtnClicked = $(event.target);
 
@@ -448,6 +457,7 @@ function handleRemoveFavItem(event) {
   }
 }
 
+// remove all shortlist items from local storage and page print
 function handleRemoveAllFavItem(event) {
   event.stopPropagation();
   titleFavArr.splice(0);
@@ -463,6 +473,12 @@ $('#delete-all-fab-btn').on("click", handleRemoveAllFavItem);
 $(document).on('click', '.save-btn', handleShortList);
 $(document).on('click', '.material-icons', handleShortList);
 
+// when the heart button is pressed, if its in favoruites, remove class and from local storage
+// if not in shortlist, add to shortlist and give it a class
+
+// the heart/favourites button consists of two elements, a button and a material icon
+// each element needs to be targeted seperately for the entire button to work
+// otherwise clicking on the heart wont save, only clicking on the borders outside of it
 function handleShortList(event) {
 
   event.stopPropagation();
@@ -473,11 +489,14 @@ function handleShortList(event) {
   console.log("class name is")
   console.log(thumbClicked[0].className);
 
+  var classNames = thumbClicked[0].className
   // check if you're clicking on the heart
-  if (thumbClicked[0].className.includes("material-icons")){
+  if (classNames.includes("material-icons")) {
 
-    if (thumbClicked[0].className.includes("material-icons")) {
+    // check if it has clicked fav
+    if (!classNames.includes("clicked-fav")) {
 
+      // if not, add clicked fav and push to favArray
       var thumbClickedTitle = thumbClicked.attr("title");
 
       // var thumbClickedId = thumbClicked.attr("ID");
@@ -494,56 +513,87 @@ function handleShortList(event) {
 
       console.log('material if');
 
-      var classNames = thumbClicked[0].className
-      if (classNames.includes("clicked-fav")) {
-        console.log('clicked fav if');
-
-        thumbClicked.removeClass("clicked-fav");
-        var index = thumbClicked.attr("title");
-        titleFavArr.splice(index, 1);
-        var index2 = thumbClicked.attr("ID");
-        titleFavArr.splice(index2, 1);
-
-        addFavBtn();
-        storeFavTitles();
-        console.log("work")
-      } else {
-
-        thumbClicked.addClass("clicked-fav");
-        addFavBtn();
-        storeFavTitles();
-      }
-    }
-    // check if you're clicking on the button
-  } else if (thumbClicked.is("button") === true) {
-    var thumbClickedTitle = thumbClicked.attr("title");
-
-    var thumbClickedId = thumbClicked.attr("ID");
-    // var thumbClickedId = thumbClicked.val();
-
-    var favObj = {
-      title: thumbClickedTitle,
-      ID: thumbClickedId,
-    }
-
-    titleFavArr.push(favObj);
-    storeFavTitles();
-    addFavBtn();
-
-    if (thumbClicked.children().hasClass("clicked-fav")) {
-      thumbClicked.children().removeClass("clicked-fav");
-      var index = thumbClicked.children().attr("title");
-      titleFavArr.splice(index, 1);
-      var index2 = thumbClicked.children().attr("ID");
-      titleFavArr.splice(index2, 1);
-
+      thumbClicked.addClass("clicked-fav");
       addFavBtn();
       storeFavTitles();
-      console.log("work")
 
-    } else {
+      // if it includes clicked fav
+      // remove class and splice from array
+    } else if (classNames.includes("clicked-fav")) {
+      console.log('clicked fav if');
+
+      thumbClicked.removeClass("clicked-fav");
+
+      var IDClicked = thumbClicked.attr("ID");
+      console.log("IDClicked")
+      console.log(IDClicked)
+
+      // find the index of the favitem in the array
+      for (var i = 0; i < titleFavArr.length; i++) {
+
+        var arrayID = titleFavArr[i].ID;
+        console.log('arrayID')
+        console.log(arrayID)
+        if (IDClicked === arrayID) {
+          console.log("found fav item in array at index")
+          console.log(i)
+          titleFavArr.splice(i, 1);
+          storeFavTitles();
+          addFavBtn();
+        }
+
+      }
+      console.log("removed from array and screen using heart")
+    }
+
+    // if not clicking on heart, check if you're clicking on the button
+  } else if (thumbClicked.is("button") === true) {
+
+    var heartClassNames = thumbClicked[0].children[0].className;
+    // if button does not have clicked fav class
+    if (!heartClassNames.includes("clicked-fav")) {
+
+      // put movie into fav array and add clicked fav class
+      var thumbClickedTitle = thumbClicked.attr("title");
+
+      var thumbClickedId = thumbClicked.attr("ID");
+
+      var favObj = {
+        title: thumbClickedTitle,
+        ID: thumbClickedId,
+      }
+
+      titleFavArr.push(favObj);
       thumbClicked.children().addClass("clicked-fav");
+      storeFavTitles();
+      addFavBtn();
 
+      // else if heart has clicked-fav, remove class and remove from array
+    } else if (heartClassNames.includes("clicked-fav")) {
+
+      thumbClicked.children().removeClass("clicked-fav");
+
+      var IDClicked = thumbClicked.attr("ID");
+      console.log("IDClicked")
+      console.log(IDClicked)
+
+      // find the index of the favitem in the array
+      for (var i = 0; i < titleFavArr.length; i++) {
+
+        var arrayID = titleFavArr[i].ID;
+        console.log('arrayID')
+        console.log(arrayID)
+        if (IDClicked === arrayID) {
+          console.log("found fav item in array at index")
+          console.log(i)
+          titleFavArr.splice(i, 1);
+          storeFavTitles();
+          addFavBtn();
+        }
+
+      }
+
+      console.log("removed from array and screen using button");
     }
   }
 
@@ -555,6 +605,8 @@ function handleShortList(event) {
 // - -
 // hide the previous div / and unhide new div
 
+// when the movie title is pressed, fetch the API URL for specfic movie
+
 $(document).on('click', '.card-image', movieClickURL);
 function movieClickURL() {
   var movieId = $(this).val(); // gives me id
@@ -562,6 +614,8 @@ function movieClickURL() {
   var movieRequestURL = baseURLOMDb + 'i=' + movieId + OMDbAPIParameter;
   printMovie(movieRequestURL)
 }
+
+// print movie elements onto new page
 function printMovie(movieRequestURL) {
   fetch(movieRequestURL)
     .then(function (response) {
@@ -609,7 +663,7 @@ function printMovie(movieRequestURL) {
       var favouritesHeart = $('<i>')
 
       favouritesHeart.addClass("material-icons");
-      
+
       favouritesHeart.text('favorite');
       favouritesButton.append(favouritesHeart);
 
@@ -673,14 +727,5 @@ function printMovie(movieRequestURL) {
       favouritesHeart.attr("ID", movieID);
       console.log("Jeison")
       initFavScreen();
-
-
-
     });
-  // initFavScreen();
 }
-// and append new items
-
-// OPTIONAL : youtube trailer
-// OPTIONAL : thumbs up + save to local storage
-// OPTIONAL : display toggle for drop down JQUERY UI
