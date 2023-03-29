@@ -1,4 +1,4 @@
-// OMDb API: http://www.omdbapi.com/?i=tt3896198&apikey=d673ee57
+// OMDb API: https://www.omdbapi.com/?i=tt3896198&apikey=d673ee57
 
 var OMDbAPIkey = 'd673ee57';
 var OMDbAPIParameter = '&apikey=d673ee57';
