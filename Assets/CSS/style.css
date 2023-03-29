@@ -1,47 +1,91 @@
-*, 
-.btn{
+*,
+.btn {
   font-family: 'Gruppo', cursive;
   font-weight: bold;
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100%;
+  line-height: 1;
 }
 
 header {
   background-color: #731DD8;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+nav {
+  background-color: #D4B483;
+  height: 60px;
+
+
+}
+
+
+.form-container {
+  padding-top: 12px;
 }
 
 .row {
   margin: 0px;
-  /* removes a default padding below search input */
 }
 
 h1 {
-  text-align: center;
+
   margin: 0;
   font-size: 86px;
 }
 
 h2 {
-  margin: 0 0 1.424rem 0;
-  padding-left: 10px;
   font-weight: bold;
-  padding-top: 2px;
-  padding-bottom: 1px;
 }
 
-nav {
-  background-color: #D4B483;
-  height: 40px;
+.choiceTitle-container {
+  text-align: center;
+}
+
+#choiceTitle {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.main-container {
+  display: flex;
+}
+
+.history-container {
+  background-color: #48A9A6;
+  text-align: center;
+  padding: 15px;
+}
+
+.short-list-container {
+  background-color: #C1666B;
+  text-align: center;
+  padding: 15px;
+
+}
+
+#short-list {
+  text-align: left;
 }
 
 .no-padding {
   padding: 0px;
   /* removes default padding from nav-card */
-}
-
-nav .input-field label i {
-  /* sets search icon to be displayed */
-  color: black;
-  -webkit-transition: color .3s;
-  transition: color .3s;
 }
 
 #search {
@@ -54,75 +98,68 @@ nav .input-field label i {
 
 #search-form input {
   /* makes search bar much prettier */
-  border-radius: 10px;
+  border-radius: 6px;
   height: 30px;
 }
 
 #search-form button {
   /* makes search btn much prettier */
-  border-radius: 10px;
-  height: 30px;
+  border-radius: 6px;
+
   margin-left: 15px;
 }
 
-.nav-card .btn {
-  border-radius: 10px;
-  height: 30px;
-  margin-left: 15px;
+.clear-btn {
+  border-radius: 6px;
+  background-color: #731DD8;
+  color: white;
   margin-bottom: 20px;
-  background-color: red;
+  padding: 5px;
+  cursor: pointer;
+
 }
 
-.nav-card {
-  height: calc(100vh - 40px);
-  /* makes nav-car (search history) full height of page */
-  padding: 0px;
-}
-
-.history {
-  background-color: #48A9A6;
-  /* width: 62%; */
-  display: flex;
-  /* flex-wrap: wrap; */
-  flex-direction: column;
-  /* justify-content: flex-start; */
-  align-items: stretch;
-  gap: 10px;
-  padding-right: 5px;
+.clear-btn:hover {
+  filter: brightness(110%);
 }
 
 .fav-btn,
-.history_item{
+.history_item {
   background-color: #D4B483;
   color: white;
-  border-radius: 10px;
-  height: 30px;
-  margin-left: 15px;
+  border-radius: 6px;
   height: auto;
-  text-align: start;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
+
 }
 
-.short-list {
-  background-color: #C1666B;
-  /* width: 100%; */
-  gap: 10px;
-  padding-left: 5px;
-  padding-right: 10px;
+.fav-btn:hover,
+.history_item:hover {
+  filter: brightness(110%);
+
 }
 
-li {
-  list-style: none;
-  padding-left: 10px;
-  line-height: 40px;
-  /* sets distance between li */
+.delete-fab-btn,
+.delete-btn {
+  padding: 2px 5px;
+  background-color: #E4DFDA;
+  cursor: pointer;
+  border-radius: 6px;
 }
+
+.delete-btn {
+  margin-left: 2px;
+}
+
+
 
 .card-title {
-  text-align: center;
-  margin: 0;
   font-size: 46px;
-  padding-bottom: 10px;
   color: black;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 body {
@@ -170,7 +207,7 @@ body {
 }
 
 /* big movie page */
-.titlecard { 
+.titlecard {
   background-color: white;
   /* flex positions the poster */
   display: flex;
@@ -198,6 +235,7 @@ p {
   color: #C1666B;
 }
 
+
 /* .pageload{
   display: flex;
   flex-wrap: wrap;
@@ -219,15 +257,17 @@ p {
 } */
 
 @media screen and (max-width: 768px) {
-  .no-padding, .pageload {
+
+  .no-padding,
+  .pageload {
     display: flex;
     flex-direction: column;
-    
+
   }
 
   .short-list {
     order: 1;
- 
+
   }
 
   .flex-container {
