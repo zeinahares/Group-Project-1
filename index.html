@@ -35,10 +35,11 @@
         </div>
       </form>
       <button id="home-btn" class="btn col s4 #1976d2 blue darken-2"> Home </button>
+      <a href="#short-link"><button id="list-btn" class="btn col s4 #1976d2 "> Shortlist </button></a>
     </div>
 
 
-    <div>
+    <div class = "history-container">
       <div class="row" style="margin-top: 2px;">
         <div class="col s6 m3 no-padding">
           <div class="nav-card history">
@@ -97,21 +98,23 @@
       </div>
     </div>
 
-    <div class="row favourites">
-      <div class="col s12 m3 no-padding">
+    <div class="col s12 m6 l6 flex-container" id="moviepage">
+      <div class="titlecard"></div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 m3 no-padding favourites">
         <div class="nav-card short-list">
-          <h2 class="card-title " style="display: inline;">Shortlist</h2>
+          <h2 class="card-title " id = "short-link" style="display: inline;">Shortlist</h2>
           <button class="btn" id="delete-all-fab-btn">Clear all</button>
           <ul id="short-list">
           </ul>
         </div>
       </div>
     </div>
-
-    <div class="col s9 flex-container" id="moviepage">
-      <div class="titlecard"></div>
-    </div>
   </div>
+
+ 
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

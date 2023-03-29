@@ -21,9 +21,6 @@ fetch(ExamplerequestUrl)
 
 // ZEINA - function for searching and displaying list of movies
 function fetchmoviesList(movieListrequestURL) {
-  // remove all inner html of the divs on new search
-  $('#movieslist').html("");
-  $('#moviepage').html("");
 
   fetch(movieListrequestURL)
     .then(function (response) {
@@ -31,6 +28,10 @@ function fetchmoviesList(movieListrequestURL) {
     })
     .then(function (data) {
       console.log(data);
+
+      // remove all inner html of the divs on new search
+      $('#movieslist').html("");
+      $('#moviepage').html("");
 
       // remove hide attribute from movieslist & hide moviepage
       $('#movieslist').removeClass('hide');
@@ -157,8 +158,7 @@ function historyRequestURL() {
 // ZEINA - Rendering HomePage with developer's choices
 function renderHomePage() {
 
-  var developerChoices = ['tt0120601', 'tt0822832', 'tt0097814', 'tt0261392'];
-
+  var developerChoices = ['tt0120601', 'tt0822832', 'tt0097814', 'tt0261392','tt0780536','tt0085794'];
 
   $('#movieslist').html("");
   $('#moviepage').html("");

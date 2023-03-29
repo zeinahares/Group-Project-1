@@ -1,5 +1,5 @@
-*, 
-.btn{
+*,
+.btn {
   font-family: 'Gruppo', cursive;
   font-weight: bold;
 }
@@ -50,19 +50,23 @@ nav .input-field label i {
 
 #search-form {
   padding-left: 10px;
+  top: 5px;
+  width: 40%
 }
 
 #search-form input {
   /* makes search bar much prettier */
   border-radius: 10px;
   height: 30px;
+  width: 43%;
 }
 
-#search-form button {
+#submit-btn {
   /* makes search btn much prettier */
   border-radius: 10px;
   height: 30px;
   margin-left: 15px;
+  width: 25%;
 }
 
 .nav-card .btn {
@@ -71,17 +75,19 @@ nav .input-field label i {
   margin-left: 15px;
   margin-bottom: 20px;
   background-color: red;
+  margin-right: 3%;
+  font-size: 110%;
 }
 
 .nav-card {
-  height: calc(100vh - 40px);
+  height: calc(100vmax);
   /* makes nav-car (search history) full height of page */
   padding: 0px;
 }
 
 .history {
   background-color: #48A9A6;
-  /* width: 62%; */
+  width: 70%;
   display: flex;
   /* flex-wrap: wrap; */
   flex-direction: column;
@@ -92,7 +98,7 @@ nav .input-field label i {
 }
 
 .fav-btn,
-.history_item{
+.history_item {
   background-color: #D4B483;
   color: white;
   border-radius: 10px;
@@ -100,14 +106,26 @@ nav .input-field label i {
   margin-left: 15px;
   height: auto;
   text-align: start;
+  width: 90%;
+  gap: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5%;
+  padding: 2%;
 }
 
 .short-list {
   background-color: #C1666B;
-  /* width: 100%; */
+  width: 80%;
   gap: 10px;
-  padding-left: 5px;
-  padding-right: 10px;
+  /* padding-left: 5px; */
+  /* padding-right: 10px; */
+  right: -20%;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 li {
@@ -120,7 +138,7 @@ li {
 .card-title {
   text-align: center;
   margin: 0;
-  font-size: 46px;
+  font-size: 250%;
   padding-bottom: 10px;
   color: black;
 }
@@ -141,16 +159,17 @@ body {
   position: unset;
   color: black;
   font-weight: bold;
+  width: 100%;
 }
 
 .card {
   /* helps with spacing of posters within cards. needed! */
-  width: calc(25% - 20px);
-  margin: 10px;
-  /* display: flex;
+  width: calc(25% - -43px);
+  margin: 5px;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end; */
+  justify-content: flex-end;
 }
 
 #choiceTitle {
@@ -160,17 +179,13 @@ body {
 
 #home-btn {
   position: relative;
-  right: -8%;
-}
-
-#moviepage {
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  right: -40%;
+  top: 1px;
+  width: 20%;
 }
 
 /* big movie page */
-.titlecard { 
+.titlecard {
   background-color: white;
   /* flex positions the poster */
   display: flex;
@@ -198,36 +213,147 @@ p {
   color: #C1666B;
 }
 
-/* .pageload{
-  display: flex;
+.favourites {
+  right: 0;
+  position: relative;
+
+}
+
+.pageload {
+  /* left: -75px;
+  position: relative; */
+  /* display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  position: relative; */
+}
+
+#moviepage {
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
   position: relative;
-} */
+  /* width: 60%; */
+}
+
+#movieslist {
+  position: relative;
+  /* width: 60%; */
+  padding: 1px;
+  padding-top: 10px;
+}
+
+.btn {
+
+  line-height: 0;
+  font-size: 92%;
+}
 
 /* .container {
   display: flex;
   flex-direction: column;
 }
 
-.short-list {
-  order: 1;
-}
-
 .flex-container {
   order: 2;
 } */
 
-@media screen and (max-width: 768px) {
-  .no-padding, .pageload {
-    display: flex;
-    flex-direction: column;
-    
+#list-btn {
+  display: none;
+}
+
+
+.save-btn {
+  width: 100%;
+}
+
+#short-list {
+  display: contents;
+}
+
+@media screen and (max-width: 1245px) { 
+
+  .card {
+    width: calc(25% - -85px);
   }
 
+
+}
+
+@media screen and (max-width: 872px) {
+
+  .save-btn {
+    width: 100%;
+  }
+
+  .btn {
+    line-height: 0;
+    font-size: 115%;
+  }
+
+  h1 {
+    font-size: 105px;
+  }
+
+  h2 {
+    padding-top: 17px;
+    padding-bottom: 9px;
+    font-size: 388%;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 345%;
+  }
+
+  p {
+    font-size: 170%;
+  }
+  
+  #search-form input {
+    width: auto;
+  }
+
+  #submit-btn {
+    width: auto;
+  }
+
+  .history {
+    display: none;
+  }
+
+  .pageload {
+    width: 100%;
+  }
+
+  #movieslist {
+    width: 100%;
+    left: 0;
+    position: relative;
+    justify-content: space-around;
+    margin-bottom: 50px;
+  }
+
+  #moviepage {
+    width: 100%;
+    position: relative;
+  }
+
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  /* .no-padding,
+  .pageload {
+    display: flex;
+    flex-direction: column;
+  } */
+
   .short-list {
-    order: 1;
- 
+    width: 400%;
+    right: 0;
   }
 
   .flex-container {
@@ -236,4 +362,104 @@ p {
     justify-content: flex-start;
     width: 100%;
   }
+
+  .card {
+    /* helps with spacing of posters within cards. needed! */
+    width: calc(25% - -43px);
+    margin: 5px;
+    /* width: calc(25% - 20px);
+    margin: 10px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .card-img {
+    width: 100%;
+  }
+
+  #search-form {
+    width: 59%;
+  }
+
+  #home-btn {
+    width: 20%;
+    right: 0;
+    margin-right: 2px;
+  }
+
+  #list-btn {
+    display: block;
+    position: relative;
+    background-color: #C1666B;
+    width: 20%;
+    right: 0;
+    margin-left: 2px;
+    top: 1px;
+  }
+
+  .nav-card {
+    height: auto;
+    padding: 20px;
+  }
+
+  #short-list {
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+  }
+
+  .fav-btn {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    text-align: center;
+    margin-bottom: 5px;
+    justify-content: space-between;
+    font-size: 136%;
+  }
+
+  .nav-card .btn {
+    border-radius: 10px;
+    height: 38px;
+    margin: 3%;
+    background-color: red;
+    width: 25%;
+    font-size: 119%;
+    position: absolute;
+    right: 0;
+  }
+
+  .card-title {
+    font-size: 55px;
+    margin-left: 2%;
+  }
+
+  #short-link {
+    left: -19%;
+    position: relative;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .short-list {
+    width: auto;
+  }
+
+  .btn {
+    font-size: 92%;
+  }
+
+  .nav-card .btn {
+    font-size: 110%;
+  }
+
+  .card {
+    width: calc(25% - -323px);
+    padding: 10px;
+  }
+
 }
