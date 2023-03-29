@@ -376,7 +376,8 @@ searchBtn.on("click", function (event) {
   console.log("ok");
   var movieTitle = input.val().trim();
   if (movieTitle === "") {
-    return alert("Input some words belog to a movie title which you want to search.");
+    return;
+    // alert("Input some words belog to a movie title which you want to search.");
   }
 
   if (titleArr.includes(movieTitle) !== true) {
