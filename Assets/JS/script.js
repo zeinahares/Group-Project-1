@@ -302,11 +302,11 @@ function initFavScreen() {
   if (storedFavTitle !== null) {
     titleFavArr = storedFavTitle;
     for (let i = 0; i < titleFavArr.length; i++) {
-      console.log("HERE!!!", titleFavArr[i].ID)
+      // console.log("HERE!!!", titleFavArr[i].ID)
       var searchedItem = `#${titleFavArr[i].ID}`
       // console.log(searchedItem)
       var hi = $(searchedItem)
-      console.log(hi)
+      // console.log(hi)
       hi.children().addClass("clicked-fav");
 
       // $(".save-btn").children().removeClass("clicked-fav");
@@ -378,6 +378,7 @@ searchBtn.on("click", function (event) {
   if (movieTitle === "") {
     return alert("Input some words belog to a movie title which you want to search.");
   }
+
   if (titleArr.includes(movieTitle) !== true) {
     titleArr.push(movieTitle);
   }
@@ -396,7 +397,7 @@ input.on("keypress", function (event) {
     if (movieTitle === "") {
       return;
     }
-    titleArr.push(movieTitle);
+
     if (titleArr.includes(movieTitle) !== true) {
       titleArr.push(movieTitle);
     }
@@ -727,5 +728,5 @@ function printMovie(movieRequestURL) {
       favouritesHeart.attr("ID", movieID);
       console.log("Jeison")
       initFavScreen();
-    });
+    })
 }
