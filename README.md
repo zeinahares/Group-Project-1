@@ -1,49 +1,60 @@
 # CineFile
 
-## Welcome to CineFile, the newest movie database website out there
-Are you a movie buff who loves learning all the details about their favorite movies? If so, then you've come to the right place! CineFile is made to be the one stop shop for all cinephiles out there. You can search for any and every movie out there, no matter how little or large, terrible or infamous, and you can be enveloped by all of the movies dreary details. Learn about the plot, actors, director, release date, awards, rating (anything else?) and buff up your knowledge of all your favorite films!
+# Description
 
-## User Story
+Welcome to CineFile, the newest movie database website out there
 
-AS A cinephile
-I WANT to search for movies and see their description, ratings and trailers
-SO THAT I can save the ones I want to watch for later
+Are you a movie buff who loves learning all the details about their favorite movies?  Do you love searching for new films and saving a list to watch later?
 
-## Acceptance Criteria for Movies
+If so, THEN you've come to the right place! CineFile is made to be the one stop info shop for all Cinephiles out there.
 
-GIVEN a main dashboard with a search bar for movie or actor/actress or genre input (AND/OR, we can load the page to the top 100 movies?)
-WHEN I search for a movie
-THEN I am presented with an image of the poster, a description, a rating, and a link to a trailer and that movie is added to the search history
-WHEN I click the trailer link
-THEN I am redirected to the YouTube trailer (maybe in a new tab?)
-WHEN I like a movie and want to save it
-THEN I can click a save button and it is saved in a shortlist
-WHEN I click on a movie in the search history and/or shortlist
-THEN I am again presented with poster, description, etc
+You can search for over 1,000,000 movies, no matter how little or large, terrible or infamous, and you can be enveloped by all of the movie dreary details.
 
-## Diagram
+Learn about the plot, actors, director, release date, runtime, genres, awards, rating and buff up your knowledge on your watchlist and all your favorite films! 
 
-![Screenshot (20)](https://user-images.githubusercontent.com/123338043/228696298-ca4e8d4a-ddf3-4f18-b68f-43c0870bb0b5.png)
-
-## Usage Instructions (Developers)
-Feel free to pull our repository onto your computer and begin improving our code to ensure CineFile remains the greatest movie data website out there for all of time.
-Future works include:
-1. Adding API to allow trailers to be viewed,
-2. improving the navbar (adding collapsible lists to the nav bar),
-3. Adding more items to the nav bar, e.g. genres,
-4. Improved viewing for devices of all sizes,
+Heres a link to check it out: https://zeinahares.github.io/Group-Project-1-CineFile/
 
 
-## Usage Instructions (End Users)
-Proceed to the following url: https://zeinahares.github.io/Group-Project-1-CineFile/
+![Screenshot of CineFile](./Assets/Images/CineFile.gif)
+
+# Installation
+
+N/A
+
+# Usage Instructions (End Users)
+
 
 Explore the grandeur of CineFile, engross yourself with all the details you love about every movie out there and impress your friends with all of your movie knowledge. Save all of your favorite movies, never lose your Search history as its saved for you (unless you delete it...), and enjoy becoming the greatest movie buff out there!
 
-## Known Issues
+If you search a movie title, you will recieve a list of all movies containing that string. If you click on a movie title, you can open a new page to view more information about that movie. Once you search, your search history is saved for future reference. If you click on the search history element, it will take you to your list of movie search.
+
+If a movie interests you and you would like to save it, press on the heart button underneath every movie title. Now, youre movie is saved and printed to the shortlist and the heart button is red. If you accidentally pressed the button and saved a movie, just press it again and it will remove it from the list. j If you leave and come back, the red heart will be there waiting for you! If you have watched a movie or no longer like it, you can remove that specific movie from your list. If you want to start over, just clear all!
+
+If you're using the website from a phone, don't worry! Your shortlist will be waiting for you at the bottom of the page. Just press the new shortlist button in the nav bar to head on over there (no need to scroll all the way!).
 
 
+# Usage Instructions (Developers)
+Feel free to pull our repository onto your computer and begin improving our code to ensure CineFile remains the greatest movie data website out there for all of time.
+Future works include:
+1. Adding API to allow trailers to be viewed,
+2. improving the navbar (changing the shortlist to a collapsible list),
+3. Adding more group lists, like watchlist, favourites, and watched
+4. Add user comments and ratings
+5. Fetching from further APIs in order to search for acotrs, directors, etc and see information and movies related to them
+6. An error page for when a movie title is not able to be fetched
 
-### Conclusion
+
+## Conclusion
 Get ready to have your mind absolutely blown away as you explore the stylish and beautifully crafted UI (user interface) of CineFile.
 
-P.S. CineFile takes no responsibility for brains on the floor, have your will and funeral plans in place!## User Story (choose one)
+# License
+
+MIT License
+
+Copyright (c) 2023 zeinahares
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
